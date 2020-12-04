@@ -1,0 +1,6 @@
+C:\Users\bpcam\OneDrive\ElevenFiftyProjects\C#\GoldBadgeConsoleApplicationChallenge\Challenge_1_Repository\bin\Debug\Challenge_1_Repository.dll
+C:\Users\bpcam\OneDrive\ElevenFiftyProjects\C#\GoldBadgeConsoleApplicationChallenge\Challenge_1_Repository\bin\Debug\Challenge_1_Repository.pdb
+C:\Users\bpcam\OneDrive\ElevenFiftyProjects\C#\GoldBadgeConsoleApplicationChallenge\Challenge_1_Repository\obj\Debug\Challenge_1_Repository.csprojAssemblyReference.cache
+C:\Users\bpcam\OneDrive\ElevenFiftyProjects\C#\GoldBadgeConsoleApplicationChallenge\Challenge_1_Repository\obj\Debug\Challenge_1_Repository.csproj.CoreCompileInputs.cache
+C:\Users\bpcam\OneDrive\ElevenFiftyProjects\C#\GoldBadgeConsoleApplicationChallenge\Challenge_1_Repository\obj\Debug\Challenge_1_Repository.dll
+C:\Users\bpcam\OneDrive\ElevenFiftyProjects\C#\GoldBadgeConsoleApplicationChallenge\Challenge_1_Repository\obj\Debug\Challenge_1_Repository.pdb
