@@ -49,12 +49,31 @@ namespace Challenge_1_Repository {
             }
         }
 
+        public void SeeItemDetails() {
+            int selection = TryParseAllowZeroReturn(Console.ReadLine());
+            string selectionString = selection.ToString();
+            if (_MenuItemsDictionary.TryGetValue(selectionString, out MenuItem x)) { 
+
+                Console.Write($"Name: \t\t{ x.Name}\n" +
+                                  $"Description:  \t{x.Description}\n" +
+                                  $"Ingredients:  \n");
+                foreach (var item in x.Ingredients) {
+                    Console.Write($"  {item}\n");
+                }
+            }
+        }
+        
+
         //Helper Methods
 
         public string DictionaryCounter() {
             string count = _MenuItemsDictionary.Count.ToString();
             return count;
 
+        }
+        public int TryParseAllowZeroReturn(string k) {
+            int.TryParse(k, out int l);
+            return l;
         }
 
         public int TryParse() {
