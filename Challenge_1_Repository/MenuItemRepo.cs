@@ -53,8 +53,8 @@ namespace Challenge_1_Repository {
             int selection = TryParseAllowZeroReturn(Console.ReadLine());
             string selectionString = selection.ToString();
             if (_MenuItemsDictionary.TryGetValue(selectionString, out MenuItem x)) {
-
-                Console.Write($"Name: \t\t{ x.Name}\n" +
+                Console.Clear();
+                Console.Write($"\nName: \t\t{ x.Name}\n" +
                               $"Description:  \t{x.Description}\n" +
                               $"Price:  \t${ x.Price}\n" +
                               $"Ingredients:  \n");
@@ -88,12 +88,12 @@ namespace Challenge_1_Repository {
             }
             Console.WriteLine($"Would you like to write a new description?");
             if (YesOrNO()) {
-                Console.WriteLine($"Please enter the new description for {tempItem.Name}");
+                Console.WriteLine($"Please enter the new description.");
                 x.Description = Console.ReadLine();
             }
-            Console.WriteLine($"Would you like to change the price for {tempItem.Name} at this time?");
+            Console.WriteLine($"Would you like to change the price at this time?");
             if (YesOrNO()) {
-                Console.WriteLine($"What is the menu price for {tempItem.Name}? ex. (9.99)");
+                Console.WriteLine($"What is the menu price? ex. (9.99)");
                 double price = TryParse(Console.ReadLine());
                 x.Price = price;
             }
@@ -150,7 +150,7 @@ namespace Challenge_1_Repository {
             string selectionString = selection.ToString();
             if (_MenuItemsDictionary.TryGetValue(selectionString, out MenuItem x)) {
 
-                Console.Write($"Name: \t\t{ x.Name}\n" +
+                Console.Write($"\nName: \t\t{ x.Name}\n" +
                                   $"Description:  \t{x.Description}\n" +
                                   $"Price:  \t${x.Price}\n" +
                                   $"Ingredients:  \n");
@@ -159,7 +159,20 @@ namespace Challenge_1_Repository {
                 }
                 Console.WriteLine($"Are you sure you wish to permanently remove {x.Name} from the menu?");
                 if (YesOrNO()) {
+                    string oldKey = selectionString;
                     _MenuItemsDictionary.Remove(selectionString);
+
+                    //if removed item was last on list then we are done, hence return;
+                    if (TryParseAllowZeroReturn(selectionString) == _MenuItemsDictionary.Count+1) { return; } 
+
+                    //else replace removed item key with last item in list value then delete that last item in list to give us a freshly ordered item list
+                    int count = _MenuItemsDictionary.Count + 1;                  
+                    _MenuItemsDictionary.Add(selection.ToString(), _MenuItemsDictionary[count.ToString()]);
+                    _MenuItemsDictionary.Remove(count.ToString());
+
+
+
+
                 }
             }
         }
