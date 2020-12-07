@@ -46,7 +46,7 @@ namespace Challenge_1_Console {
                         EditItem();
                         break;
                     case "4": //Delete
-
+                        RemoveItemFromList();
                         break;
                     case "5":  //???
 
@@ -73,18 +73,20 @@ namespace Challenge_1_Console {
 
         }
 
-        // View all menu items
+        // View 
         private void ViewMenuItems() {
             Console.Clear();
             _menuItemRepo.Display();
             Console.WriteLine("\nSelect a number to see details for that item.  Any other entry to return to main menu");
             _menuItemRepo.SeeItemDetails();
         }
+        //Add
         private void AddToMenu() {
             Console.Clear();
             _menuItemRepo.CreateNewMenuItem();
 
         }
+        //Edit
         private void EditItem() {
             Console.Clear();
             _menuItemRepo.Display();
@@ -92,6 +94,14 @@ namespace Challenge_1_Console {
             
             _menuItemRepo.EditMenuItem();
 
+        }
+        //Remove
+        private void RemoveItemFromList() {
+            Console.Clear();
+            _menuItemRepo.Display();
+            Console.WriteLine("\nSelect the number of the item you wish to remove from menu.  Any other entry will return you to the main menu");
+
+            _menuItemRepo.Remove();
         }
         
         
@@ -104,7 +114,7 @@ namespace Challenge_1_Console {
         
         //Seed Method
         private void Seed() {
-            MenuItem chkParm = new MenuItem("Chicken Parm", "Breaded Chicken with side of spaghetti, topped with sauce and cheese", new List<string>() { "bread", "cheese" }, 9.99);
+            MenuItem chkParm = new MenuItem("Chicken Parm", "Breaded Chicken with side of spaghetti, topped with sauce and cheese", new List<string>() { "bread", "cheese", "marinaria", "garlic" }, 9.99);
             _menuItemRepo._MenuItemsDictionary.Add("1", chkParm);
         }
     }
