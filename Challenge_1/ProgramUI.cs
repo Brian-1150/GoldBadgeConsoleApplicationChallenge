@@ -7,8 +7,8 @@ using Challenge_1_Repository;
 
 namespace Challenge_1_Console {
     class ProgramUI {
-            private MenuItemRepo _menuItemRepo = new MenuItemRepo();
-            
+        private MenuItemRepo _menuItemRepo = new MenuItemRepo();
+
         public void Run() {
             //Seed
             Seed();
@@ -28,7 +28,7 @@ namespace Challenge_1_Console {
                     " 3.  Edit a Menu Item\n" +
                     " 4.  Delete a Menu Item\n" +
                     " 5.  .........\n" +
-                   
+
                     "10.  Exit");
 
                 //Get User Input
@@ -40,21 +40,21 @@ namespace Challenge_1_Console {
                         ViewMenuItems();
                         break;
                     case "2":  //Add
-                       
+                        AddToMenu();
                         break;
                     case "3": //Edit
-                        
+                        EditItem();
                         break;
                     case "4": //Delete
-                       
+
                         break;
                     case "5":  //???
-                        
+
                         break;
                     case "6": //???                                            
-                       
+
                         break;
-                   
+
                     case "10": //Exit
                         Console.WriteLine("Have a great rest of your day!");
                         exit = true;
@@ -80,8 +80,19 @@ namespace Challenge_1_Console {
             Console.WriteLine("\nSelect a number to see details for that item.  Any other entry to return to main menu");
             _menuItemRepo.SeeItemDetails();
         }
+        private void AddToMenu() {
+            Console.Clear();
+            _menuItemRepo.CreateNewMenuItem();
 
-        
+        }
+        private void EditItem() {
+            Console.Clear();
+            _menuItemRepo.Display();
+            Console.WriteLine("\nSelect the number of the item you wish to edit.  Any other entry to return to the main menu");
+            
+            _menuItemRepo.EditMenuItem();
+
+        }
         
         
         

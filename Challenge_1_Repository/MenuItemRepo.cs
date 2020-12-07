@@ -43,7 +43,7 @@ namespace Challenge_1_Repository {
         }
 
         //Read
-       public void Display() {
+        public void Display() {
             foreach (KeyValuePair<string, MenuItem> kvp in _MenuItemsDictionary) {
                 Console.WriteLine($"#:  {kvp.Key}  {kvp.Value.Name}");
             }
@@ -52,7 +52,7 @@ namespace Challenge_1_Repository {
         public void SeeItemDetails() {
             int selection = TryParseAllowZeroReturn(Console.ReadLine());
             string selectionString = selection.ToString();
-            if (_MenuItemsDictionary.TryGetValue(selectionString, out MenuItem x)) { 
+            if (_MenuItemsDictionary.TryGetValue(selectionString, out MenuItem x)) {
 
                 Console.Write($"Name: \t\t{ x.Name}\n" +
                                   $"Description:  \t{x.Description}\n" +
@@ -62,12 +62,75 @@ namespace Challenge_1_Repository {
                 }
             }
         }
-        
+        //Update
+
+        public void EditMenuItem() {  // same code as SeeDetails
+            int selection = TryParseAllowZeroReturn(Console.ReadLine());
+            string selectionString = selection.ToString();
+            if (_MenuItemsDictionary.TryGetValue(selectionString, out MenuItem x)) {
+
+                Console.Write($"Name: \t\t{ x.Name}\n" +
+                                  $"Description:  \t{x.Description}\n" +
+                                  $"Ingredients:  \n");
+                foreach (var item in x.Ingredients) {
+                    Console.Write($"  {item}\n");
+                }
+            }
+            var tempItem = new MenuItem();
+            Console.WriteLine("Would you like to change the name?");
+            if (YesOrNO()) {
+                Console.WriteLine("What is the new name?");
+                tempItem.Name = Console.ReadLine();
+                x.Name = tempItem.Name;
+            }
+            Console.WriteLine($"Would you like to write a new description for {tempItem.Name}?");
+            if (YesOrNO()) {
+                Console.WriteLine($"Please enter the new description for {tempItem.Name}");
+                tempItem.Description = Console.ReadLine();
+                x.Description = tempItem.Description;
+            }
+            Console.WriteLine($"Would you like to change the price for {tempItem.Name} at this time?");
+            if (YesOrNO()) {
+                Console.WriteLine($"What is the menu price for {tempItem.Name}? ex. (9.99)");
+                double price = TryParse(Console.ReadLine());
+                tempItem.Price = price;
+                x.Price = tempItem.Price;
+            }
+         
+            Console.WriteLine($"Would you like to remove items from the current list of ingredients?");
+            if (YesOrNO()) {
+                Console.WriteLine("How many ingredients do you wish to remove?");
+                int numOfIngrdients = TryParse();
+                for (int i = 0; i < numOfIngrdients; i++) {
+                int index = 1;
+                    foreach (var item in x.Ingredients) {
+                        Console.WriteLine(index + item);
+                        index++;
+
+                    }
+                    Console.WriteLine("Enter the number next to the ingredient you wish to remove");
+                    int remove = TryParse();
+                    x.Ingredients.RemoveAt(remove - 1);
+                }
+            }
+            Console.WriteLine($"Would you like to add ingredients at this time?");
+            if (YesOrNO()) {
+                Console.WriteLine($"How many ingredients would you like add?");
+                int numOfIngrdients = TryParse();
+                for (int i = 0; i < numOfIngrdients; i++) {
+                    Console.WriteLine("What is the next ingredient?");
+                    string next = Console.ReadLine();
+                    x.Ingredients.Add(next);
+                }
+
+            }
+
+        }
 
         //Helper Methods
 
         public string DictionaryCounter() {
-            string count = _MenuItemsDictionary.Count.ToString();
+            string count = (_MenuItemsDictionary.Count + 1).ToString();
             return count;
 
         }
@@ -98,8 +161,8 @@ namespace Challenge_1_Repository {
         }
 
         public bool YesOrNO() {
-            string yn = Console.ReadLine();
-        Bool: do {
+        Bool: string yn = Console.ReadLine();
+        do {
                 if (yn.ToLower() == "y") {
                     return true;
                 }
