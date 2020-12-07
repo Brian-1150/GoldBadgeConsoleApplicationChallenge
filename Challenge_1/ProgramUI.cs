@@ -27,9 +27,7 @@ namespace Challenge_1_Console {
                     " 2.  Add a Menu Item\n" +
                     " 3.  Edit a Menu Item\n" +
                     " 4.  Delete a Menu Item\n" +
-                    " 5.  .........\n" +
-
-                    "10.  Exit");
+                    " 5.  Exit");
 
                 //Get User Input
                 string input = Console.ReadLine();
@@ -48,29 +46,20 @@ namespace Challenge_1_Console {
                     case "4": //Delete
                         RemoveItemFromList();
                         break;
-                    case "5":  //???
-
-                        break;
-                    case "6": //???                                            
-
-                        break;
-
-                    case "10": //Exit
+                    case "5": //Exit
                         Console.WriteLine("Have a great rest of your day!");
                         exit = true;
                         break;
                     default:
-                        Console.WriteLine("Please enter a valid number 1-10");
+                        Console.WriteLine("Please enter a valid number 1-5");
                         break;
                 }
-                Console.WriteLine("Please press any key to continue..."); //just to pause and let user know he is in control of proceeding
+                Console.WriteLine("Please press any key to continue..."); //just to pause and let user know they are in control of proceeding
                 Console.ReadKey();
 
                 Console.Clear(); // clears the console window to remove all the previous menues etc..
 
             } while (exit == false);
-
-
         }
 
         // View 
@@ -103,15 +92,7 @@ namespace Challenge_1_Console {
 
             _menuItemRepo.Remove();
         }
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
         //Seed Method
         private void Seed() {
             MenuItem chkParm = new MenuItem("Chicken Parm", "Breaded Chicken with side of spaghetti, topped with sauce and cheese", new List<string>() { "bread", "cheese", "marinaria", "garlic" }, 9.99);

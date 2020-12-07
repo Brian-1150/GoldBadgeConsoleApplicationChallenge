@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace Challenge_1_Repository {
     public class MenuItemRepo {
-        private MenuItem _accessToMenuItemPoco = new MenuItem();
         public List<MenuItem> _MenuItemsList = new List<MenuItem>();
         public Dictionary<string, MenuItem> _MenuItemsDictionary = new Dictionary<string, MenuItem>();
 
@@ -36,10 +35,9 @@ namespace Challenge_1_Repository {
                     string next = Console.ReadLine();
                     ingredients.Add(next);
                 }
-
             }
             MenuItem newItem = new MenuItem(item, description, ingredients, price);
-            _MenuItemsDictionary.Add(DictionaryCounter(), newItem);
+            _MenuItemsDictionary.Add(DictionaryCounter(), newItem); //makes the key 1 higher than current count
         }
 
         //Read
@@ -79,7 +77,6 @@ namespace Challenge_1_Repository {
                 }
             }
             else { return; }  // exits out of current method
-            var tempItem = new MenuItem();
             Console.WriteLine("Would you like to change the name?");
             if (YesOrNO()) {
                 Console.WriteLine("What is the new name?");
@@ -140,9 +137,7 @@ namespace Challenge_1_Repository {
                     string next = Console.ReadLine();
                     x.Ingredients.Add(next);
                 }
-
             }
-
         }
         //Delete
         public void Remove() {
@@ -159,7 +154,6 @@ namespace Challenge_1_Repository {
                 }
                 Console.WriteLine($"Are you sure you wish to permanently remove {x.Name} from the menu?");
                 if (YesOrNO()) {
-                    string oldKey = selectionString;
                     _MenuItemsDictionary.Remove(selectionString);
 
                     //if removed item was last on list then we are done, hence return;
@@ -169,26 +163,23 @@ namespace Challenge_1_Repository {
                     int count = _MenuItemsDictionary.Count + 1;                  
                     _MenuItemsDictionary.Add(selection.ToString(), _MenuItemsDictionary[count.ToString()]);
                     _MenuItemsDictionary.Remove(count.ToString());
-
-
-
-
                 }
             }
         }
 
         //Helper Methods
-
-        public string DictionaryCounter() {
+        //To establish key for new items
+        public string DictionaryCounter() { 
             string count = (_MenuItemsDictionary.Count + 1).ToString();
             return count;
 
         }
+        //Frequently used code
         public int TryParseAllowZeroReturn(string k) {
             int.TryParse(k, out int l);
             return l;
         }
-
+        //Like above but does not allow "0" to be returned
         public int TryParse() {
             string number = Console.ReadLine();
             int.TryParse(number, out int k);
@@ -200,6 +191,7 @@ namespace Challenge_1_Repository {
             return k;
 
         }
+        //Overload for double
         public double TryParse(string dub) {
             double.TryParse(dub, out double d);
             while (d <= 0) {
@@ -209,7 +201,7 @@ namespace Challenge_1_Repository {
             }
             return d;
         }
-
+        //frequently used code
         public bool YesOrNO() {
         Bool: string yn = Console.ReadLine();
             do {
@@ -218,11 +210,10 @@ namespace Challenge_1_Repository {
                 }
                 else if (yn.ToLower() == "n") {
                     return false;
-
                 }
                 else {
                     Console.WriteLine("Please enter a 'y' or 'n'");
-                    goto Bool;
+                    goto Bool; //goto and label scheme because bool was saying not all paths return value(even though it should because it is in a do while loop
                 }
 
             } while (yn != "y" && yn != "n");

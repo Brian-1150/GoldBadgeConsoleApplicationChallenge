@@ -10,7 +10,7 @@ namespace Challenge_1_Repository {
         public double Price { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public List<string> Ingredients { get; set; } = new List<string>();
+        public List<string> Ingredients { get; set; } = new List<string>(); //trick to create empty list to prevent possible null exception later
 
         public MenuItem() { }
 
