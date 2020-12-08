@@ -23,9 +23,9 @@ namespace Challenge_2_Repository {
         public void ViewQueue() {
             Console.WriteLine("ClaimID\tType\tDescription\t\tAmount\tDateOfIncident\tDateOfClaim\tFiledOnTime\n");
             foreach (var claim in _ClaimsQueue) {
+                //cuts off a long description to not disrupt the table.  But accounts for a small description so we don't get out of range exception
                 if (claim.Description.Length < 15) {
-
-                    Console.WriteLine($"{claim.ClaimID}\t{claim.ClaimType}\t{claim.Description}...\t\t{claim.ClaimAmount}" +
+                                        Console.WriteLine($"{claim.ClaimID}\t{claim.ClaimType}\t{claim.Description}...\t\t{claim.ClaimAmount}" +
                         $"\t{claim.DateOfIncident.ToString("M/d/yyyy")}\t{claim.DateOfClaim.ToString("M/d/yyyy")}\t{claim.isValid}");
                 }
                 else {

@@ -24,6 +24,7 @@ namespace Challenge_2_Repository {
             ClaimAmount = amount;
             DateOfIncident = incident;
             DateOfClaim = claimDate;
+            //can I put the bool condition inside this constructor???
             isValid = valid;
 
             
