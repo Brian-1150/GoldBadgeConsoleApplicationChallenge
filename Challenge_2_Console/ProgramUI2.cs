@@ -27,7 +27,6 @@ namespace Challenge_2_Console {
                     " 1.  View Queue\n" +
                     " 2.  Add a New Claim to the Queue\n" +
                     " 3.  Pull Next Claim from Queue\n" +
-                    " 4.  ....\n" +
                     " 5.  Exit");
 
                 //Get User Input
@@ -65,13 +64,13 @@ namespace Challenge_2_Console {
 
         //View
         public void ViewQueue() {
+            Console.Clear();
             _claimsRepo.ViewQueue();
-
-
 
         }
 
         //Add
+        //user inputs one category at a time and then it as added to queue all together as one new claims object
         public void CreateNewClaim() {
             Console.WriteLine("What is the ID for the new claim?");
             int id = _claimsRepo._accesssToChallenge1RepoMethods.TryParse();
@@ -107,25 +106,36 @@ namespace Challenge_2_Console {
             Claims newClaim = new Claims(id, type, description, amount, incident, claimDate, isValid);
             _claimsRepo.AddClaim(newClaim);
 
-
-
         }
 
         //Edit
         public void NextItemInQueue() {
-
+            _claimsRepo.NextItemInQueue();
+            Console.WriteLine("Would you like to proceed with this claim now?");
+            if (!_claimsRepo._accesssToChallenge1RepoMethods.YesOrNO()) {
+                Console.WriteLine($"The claim will remain in the queue");
+                return;
+            }
+            if (_claimsRepo.Dequeue()) {
+                Console.WriteLine("Claim successfully permanently removed from queue");
+            }
+            else
+                Console.WriteLine("Unable to remove claim from queue at this time.  Please try agian");
         }
-
-        //Remove
-
 
         //Seed
         public void Seed() {
             var seedClaim1 = new Claims(1, "Auto", "Crash", 500, new DateTime(2020, 12, 12), new DateTime(2020, 12, 25), true);
             var seedClaim2 = new Claims(2, "Home", "A silly roofer was jumping up and down and crashed into my living room", 8000, new DateTime(2020, 10, 8), new DateTime(2020, 12, 7), true);
-            _claimsRepo.AddClaim(seedClaim2);
-            _claimsRepo.AddClaim(seedClaim1);
+            _claimsRepo.AddClaim(seedClaim2);//is there a way to add multiple seed claims in one line???
+            _claimsRepo.AddClaim(seedClaim1);//instead of 2 separate lines like this
 
+
+            //Fixes needed:  User must choose Auto, Home, Theft, not just any string.  
+            //               Catch future dates as invalid and do not allow claim date to be before incident
+            //Should we add an edit method for manually changing a claim that is already in queue??
+            //invalid day or month throws exception.  consider user entering full date in one read line and check it for validity
+            //Prevent user from entering the same claim id of an existing claim. Consider implementing auto generated id
         }
     }
 }
