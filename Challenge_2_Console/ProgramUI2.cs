@@ -26,8 +26,8 @@ namespace Challenge_2_Console {
                 Console.WriteLine("Select an option:  \n" +
                     " 1.  View Queue\n" +
                     " 2.  Add a New Claim to the Queue\n" +
-                    " 3.  Edit a Menu Item\n" +
-                    " 4.  Delete a Menu Item\n" +
+                    " 3.  Pull Next Claim from Queue\n" +
+                    " 4.  ....\n" +
                     " 5.  Exit");
 
                 //Get User Input
@@ -41,8 +41,8 @@ namespace Challenge_2_Console {
                     case "2":  //Add
                         CreateNewClaim();
                         break;
-                    case "3": //Edit
-                              // EditItem();
+                    case "3": //Next Queue
+                        NextItemInQueue();
                         break;
                     case "4": //Delete
                               // RemoveItemFromList();
@@ -112,6 +112,9 @@ namespace Challenge_2_Console {
         }
 
         //Edit
+        public void NextItemInQueue() {
+
+        }
 
         //Remove
 
