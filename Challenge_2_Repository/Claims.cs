@@ -13,6 +13,7 @@ namespace Challenge_2_Repository {
         public DateTime DateOfIncident { get; set; }
         public DateTime DateOfClaim { get; set; }
         public bool isValid { get; set; }
+        public string ShortDescription { get; set; }
 
         public Claims() { } // must always match name of class??
 
@@ -24,6 +25,9 @@ namespace Challenge_2_Repository {
             DateOfIncident = incident;
             DateOfClaim = claimDate;
             isValid = valid;
+
+            
+
         }
     }
 }

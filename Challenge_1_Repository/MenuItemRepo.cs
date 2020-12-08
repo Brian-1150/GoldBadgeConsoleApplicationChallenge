@@ -203,7 +203,8 @@ namespace Challenge_1_Repository {
         }
         //frequently used code
         public bool YesOrNO() {
-        Bool: string yn = Console.ReadLine();
+        Bool:
+            string yn = Console.ReadLine();
             do {
                 if (yn.ToLower() == "y") {
                     return true;
@@ -213,6 +214,7 @@ namespace Challenge_1_Repository {
                 }
                 else {
                     Console.WriteLine("Please enter a 'y' or 'n'");
+
                     goto Bool; //goto and label scheme because bool was saying not all paths return value(even though it should because it is in a do while loop
                 }
 

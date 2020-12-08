@@ -51,6 +51,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Challenge_1_Repository\Challenge_1_Repository.csproj">
+      <Project>{1682A4A9-175E-4516-A2EF-8308F87B7291}</Project>
+      <Name>Challenge_1_Repository</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Challenge_2_Repository\Challenge_2_Repository.csproj">
       <Project>{45e37529-828a-4ddb-b8b5-a5814a36e573}</Project>
       <Name>Challenge_2_Repository</Name>

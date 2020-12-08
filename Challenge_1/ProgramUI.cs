@@ -10,16 +10,17 @@ namespace Challenge_1_Console {
         private MenuItemRepo _menuItemRepo = new MenuItemRepo();
 
         public void Run() {
+            
             //Seed
             Seed();
             //Menu
             Menu();
-        }
+        } 
 
         //Main Menu
         private void Menu() {
 
-            bool exit = false; //Why do I have to assign false since default bool should be false
+            bool exit = false; 
             do {
                 //Display Menu
                 Console.WriteLine("Select an option:  \n" +
