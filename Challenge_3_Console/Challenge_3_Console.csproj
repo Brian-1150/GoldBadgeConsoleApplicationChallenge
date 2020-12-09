@@ -43,11 +43,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ProgramUI3.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Challenge_1_Repository\Challenge_1_Repository.csproj">
+      <Project>{1682a4a9-175e-4516-a2ef-8308f87b7291}</Project>
+      <Name>Challenge_1_Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Challenge_3_Repository\Challenge_3_Repository.csproj">
+      <Project>{403f6179-84e7-4c1d-93b5-16b5dbf0ef4d}</Project>
+      <Name>Challenge_3_Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

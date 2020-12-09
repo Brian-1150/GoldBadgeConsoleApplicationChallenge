@@ -1,0 +1,12 @@
+C:\Users\bpcam\OneDrive\ElevenFiftyProjects\C#\GoldBadgeConsoleApplicationChallenge\Challenge_3_Console\bin\Debug\Challenge_3_Console.exe.config
+C:\Users\bpcam\OneDrive\ElevenFiftyProjects\C#\GoldBadgeConsoleApplicationChallenge\Challenge_3_Console\bin\Debug\Challenge_3_Console.exe
+C:\Users\bpcam\OneDrive\ElevenFiftyProjects\C#\GoldBadgeConsoleApplicationChallenge\Challenge_3_Console\bin\Debug\Challenge_3_Console.pdb
+C:\Users\bpcam\OneDrive\ElevenFiftyProjects\C#\GoldBadgeConsoleApplicationChallenge\Challenge_3_Console\bin\Debug\Challenge_3_Repository.dll
+C:\Users\bpcam\OneDrive\ElevenFiftyProjects\C#\GoldBadgeConsoleApplicationChallenge\Challenge_3_Console\bin\Debug\Challenge_3_Repository.pdb
+C:\Users\bpcam\OneDrive\ElevenFiftyProjects\C#\GoldBadgeConsoleApplicationChallenge\Challenge_3_Console\obj\Debug\Challenge_3_Console.csprojAssemblyReference.cache
+C:\Users\bpcam\OneDrive\ElevenFiftyProjects\C#\GoldBadgeConsoleApplicationChallenge\Challenge_3_Console\obj\Debug\Challenge_3_Console.csproj.CoreCompileInputs.cache
+C:\Users\bpcam\OneDrive\ElevenFiftyProjects\C#\GoldBadgeConsoleApplicationChallenge\Challenge_3_Console\obj\Debug\Challenge_3_Console.csproj.CopyComplete
+C:\Users\bpcam\OneDrive\ElevenFiftyProjects\C#\GoldBadgeConsoleApplicationChallenge\Challenge_3_Console\obj\Debug\Challenge_3_Console.exe
+C:\Users\bpcam\OneDrive\ElevenFiftyProjects\C#\GoldBadgeConsoleApplicationChallenge\Challenge_3_Console\obj\Debug\Challenge_3_Console.pdb
+C:\Users\bpcam\OneDrive\ElevenFiftyProjects\C#\GoldBadgeConsoleApplicationChallenge\Challenge_3_Console\bin\Debug\Challenge_1_Repository.dll
+C:\Users\bpcam\OneDrive\ElevenFiftyProjects\C#\GoldBadgeConsoleApplicationChallenge\Challenge_3_Console\bin\Debug\Challenge_1_Repository.pdb

@@ -5,11 +5,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{462FEA0E-74F8-4738-B976-E926AF50945D}</ProjectGuid>
+    <ProjectGuid>{81022894-68E0-4292-BD54-EA6C0B861BEA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Challenge_3_Tests</RootNamespace>
-    <AssemblyName>Challenge_3_Tests</AssemblyName>
+    <RootNamespace>Challenge_2_Tests</RootNamespace>
+    <AssemblyName>Challenge_2_Tests</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -49,16 +49,16 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BadgeRepoTests.cs" />
+    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Challenge_3_Repository\Challenge_3_Repository.csproj">
-      <Project>{403f6179-84e7-4c1d-93b5-16b5dbf0ef4d}</Project>
-      <Name>Challenge_3_Repository</Name>
+    <ProjectReference Include="..\Challenge_2_Repository\Challenge_2_Repository.csproj">
+      <Project>{45e37529-828a-4ddb-b8b5-a5814a36e573}</Project>
+      <Name>Challenge_2_Repository</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
