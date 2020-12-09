@@ -26,9 +26,9 @@ namespace Challenge_3_Repository {
 
 
         //Update
-        public void AddDoorsToBadge(int key, Badges updatedBadge) {
+        public void AddDoorsToBadge(int key, List<string> doorsAdded) {
             var badgeToUpdate = GetBadgeByKey(key);
-            badgeToUpdate.HasAccessTo.AddRange(updatedBadge.HasAccessTo);   // = updatedBadge.HasAccessTo;
+            badgeToUpdate.HasAccessTo.AddRange(doorsAdded);   // = updatedBadge.HasAccessTo;
         }
 
         public void RemoveDoorsFromBadge(int key, Badges updatedBadge) {
