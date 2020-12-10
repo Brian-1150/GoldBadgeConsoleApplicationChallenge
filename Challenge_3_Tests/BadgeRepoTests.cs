@@ -9,27 +9,27 @@ namespace Challenge_3_Tests {
         private Badges _seedBadge = new Badges(1001, new List<string>() { "A1", "A2", "A5" });
         Badges _seedBadge2 = new Badges(1002, new List<string>() { "A1", "A2", "A9" });
         private BadgesRepo _badgeRepo = new BadgesRepo();
-        
-        
+
+
         [TestInitialize]
         public void Arrange() {
 
-            
+
             _badgeRepo.CreateNewBadge(_seedBadge.BadgeID, _seedBadge);
-            _badgeRepo.CreateNewBadge(1002, _seedBadge2);  
+            _badgeRepo.CreateNewBadge(1002, _seedBadge2);
         }
 
         //View Method
         [TestMethod]
         public void ViewBadges() {
             //Arrange
-              //see test initialize for arrangement
+            //see test initialize for arrangement
             //Act
-           var x = _badgeRepo.DisplayListOfBadges();
+            var x = _badgeRepo.DisplayListOfBadges();
 
             //Assert
             Assert.IsNotNull(x);
-
+            Assert.IsTrue(x.Count > 0);
         }
         [TestMethod]
         public void ViewDoors() {
@@ -49,7 +49,7 @@ namespace Challenge_3_Tests {
             var testNewBadge = new Badges();
             testNewBadge.BadgeID = 45;
             testNewBadge.EmployeeName = "Joe";
-            testNewBadge.HasAccessTo = new List<string>(){ "B2"};
+            testNewBadge.HasAccessTo = new List<string>() { "B2" };
             //Act
             _badgeRepo.CreateNewBadge(testNewBadge.BadgeID, testNewBadge);
             //Assert
@@ -64,7 +64,7 @@ namespace Challenge_3_Tests {
             _badgeRepo.CreateNewBadge(1003, josh);  //Create new badge and add to repo 
             //Act
             _badgeRepo.AddDoorsToBadge(1003, new List<string>() { "A9" }); //add door A9
-            
+
             //Assert
             Assert.IsTrue(josh.HasAccessTo.Contains("A9")); //confirm A9 was indeed added
         }
@@ -95,7 +95,7 @@ namespace Challenge_3_Tests {
             //Arrange
             _seedBadge2.EmployeeName = "Joe";
             //Act
-            var x =_badgeRepo.GetBadgeByKey(1002);
+            var x = _badgeRepo.GetBadgeByKey(1002);
             var y = _badgeRepo.GetBadgeByKey(102);
             //Assert
             Assert.AreEqual(x.EmployeeName, "Joe");
