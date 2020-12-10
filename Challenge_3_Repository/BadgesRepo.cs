@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Challenge_3_Repository {
     public class BadgesRepo {
-        private List<Badges> _ClaimsList = new List<Badges>();
+        
         private Dictionary<int, Badges> _BadgeDictionary = new Dictionary<int, Badges>();
         private List<string> _Doors = new List<string>() { "A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8", "A9" };
 
@@ -42,7 +42,7 @@ namespace Challenge_3_Repository {
             badgeToUpdate.HasAccessTo.Clear();
         }
         //Delete
-
+           //*See deactivate method
 
         //Helper Methods
         public Badges GetBadgeByKey(int key) {

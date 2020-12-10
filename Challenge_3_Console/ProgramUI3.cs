@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Challenge_3_Repository;
-using Challenge_1_Repository; //access to y/n and tryparse helper methods
 
 namespace Challenge_3_Console {
     class ProgramUI3 {
@@ -228,7 +227,6 @@ namespace Challenge_3_Console {
             _repo.RemoveDoorsFromBadge(badge.BadgeID, listOfRemovedDoors);
             Console.WriteLine("Press any key to continue");
             Console.ReadKey();
-
         }
 
         //Deactivate Badge
@@ -256,12 +254,9 @@ namespace Challenge_3_Console {
             }
             Console.WriteLine("Press any key to return to the previous menu");
             Console.ReadKey();
-
         }
 
-
-
-        //Add 
+    //Add 
         public void AddBadge() {
             Console.Clear();
             string yn;
@@ -337,11 +332,6 @@ namespace Challenge_3_Console {
          
         }
 
-
-
-
-
-
         //Helper Methods
         public int TryParse(string number) {
 
@@ -352,7 +342,6 @@ namespace Challenge_3_Console {
                 int.TryParse(number, out k);
             }
             return k;
-
         }
 
         public bool YesOrNO(string yn) {
