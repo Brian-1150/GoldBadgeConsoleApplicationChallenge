@@ -83,6 +83,7 @@ namespace Challenge_3_Console {
         }
 
         //Update
+
         public void UpdateBadge() {
             Console.Clear();
             ViewDictionaryOfBadges();
@@ -96,60 +97,6 @@ namespace Challenge_3_Console {
             else Console.WriteLine($"Start over!  {input} is not a valid BadgeID on this list");
 
         }
-        //Add Doors
-        public void AddDoors(Badges badge) {
-            var listOfAddedDoors = new List<string>();
-            var listOfDoors = _repo.ListOfDoors(); //temporary list to add to.  Then send it to repo to be added to actual badge
-            Console.Clear();
-            Console.Write($"{badge.BadgeID} has access to the following doors:");
-            foreach (var currentDoor in badge.HasAccessTo) {
-                Console.Write(currentDoor + " ");
-            }
-            Console.WriteLine("\n\nAvialable doors to add:\n");
-            var doorsNotAlreadyOnBadge = listOfDoors.Except(badge.HasAccessTo).ToList(); //shows only doors not already assigned to this badge
-            foreach (var door in doorsNotAlreadyOnBadge) {
-                Console.WriteLine(door);
-            }
-            int doorsToAdd;
-            do {
-                Console.WriteLine($"How many additional doors would you like to give {badge.BadgeID} access to?");
-                doorsToAdd = TryParse(Console.ReadLine());
-                if (doorsToAdd <= 0 && doorsToAdd > doorsNotAlreadyOnBadge.Count) {
-                    Console.WriteLine("Please enter a valid number no greater than the number of doors on the list");
-                }
-            } while (doorsToAdd <= 0 && doorsToAdd > doorsNotAlreadyOnBadge.Count);
-
-            for (int i = 0; i < doorsToAdd; i++) {
-            string input;
-                Console.WriteLine("Which door would you like to add next?");
-                int count = listOfAddedDoors.Count;
-                    input = Console.ReadLine();
-                foreach (var door in doorsNotAlreadyOnBadge) {
-                 
-                    if (input.ToLower() == door.ToLower()) {
-                        listOfAddedDoors.Add(door);  //needs fixed.  choose one or the other
-                       // badge.HasAccessTo.Add(door); //and adjust repo method accordingly
-                    }
-                    }
-                    if (count == listOfAddedDoors.Count) {
-                       Console.WriteLine($" {input} not a valid selection and was not added to badge {badge.BadgeID}\n\n");
-                }
-                else { Console.WriteLine($" {input.ToUpper()} successfully added to badge {badge.BadgeID}\n\n"); }
-                    doorsNotAlreadyOnBadge = doorsNotAlreadyOnBadge.Except(listOfAddedDoors).ToList();
-                foreach (var door in doorsNotAlreadyOnBadge) { //foreach loop to print updated available door list
-                    Console.WriteLine(door);
-                }
-                }
-                _repo.AddDoorsToBadge(badge.BadgeID, listOfAddedDoors);
-            Console.WriteLine("Press any key to continue");
-            Console.ReadKey();
-        }
-
-        //Remove Doors
-        public void RemoveDoors(Badges badge) { }
-
-        //Deactivate Badge
-        public void DeactivateBadge(Badges badge) { }
 
         //Update Menu
         public void UpdateMenu(Badges badge) {
@@ -190,11 +137,204 @@ namespace Challenge_3_Console {
 
             } while (exit == false);
         }
+        //Add Doors
+        public void AddDoors(Badges badge) {
+            var listOfAddedDoors = new List<string>();
+            var listOfDoors = _repo.ListOfDoors(); //temporary list to add to.  Then send it to repo to be added to actual badge
+            Console.Clear();
+            Console.Write($"{badge.BadgeID} has access to the following doors:");
+            foreach (var currentDoor in badge.HasAccessTo) {
+                Console.Write(currentDoor + " ");
+            }
+            Console.WriteLine("\n\nAvialable doors to add:\n");
+            var doorsNotAlreadyOnBadge = listOfDoors.Except(badge.HasAccessTo).ToList(); //shows only doors not already assigned to this badge
+            foreach (var door in doorsNotAlreadyOnBadge) {
+                Console.WriteLine(door);
+            }
+            int doorsToAdd;
+            do {
+                Console.WriteLine($"How many additional doors would you like to give {badge.BadgeID} access to?");
+                doorsToAdd = TryParse(Console.ReadLine());
+                if (doorsToAdd <= 0 || doorsToAdd > doorsNotAlreadyOnBadge.Count) {
+                    Console.WriteLine("Please enter a valid number no greater than the number of doors on the list");
+                }
+            } while (doorsToAdd <= 0 || doorsToAdd > doorsNotAlreadyOnBadge.Count);
 
-        //Add
+            for (int i = 0; i < doorsToAdd; i++) {
+                string input;
+                Console.WriteLine("Which door would you like to add next?");
+                int count = listOfAddedDoors.Count;
+                input = Console.ReadLine();
+                foreach (var door in doorsNotAlreadyOnBadge) {
+
+                    if (input.ToLower() == door.ToLower()) {
+                        listOfAddedDoors.Add(door);
+                    }
+                }
+                Console.Clear();
+                if (count == listOfAddedDoors.Count) {
+                    Console.WriteLine($" {input} not a valid selection and was not added to badge {badge.BadgeID}\n\n");
+                }
+                else { Console.WriteLine($" {input.ToUpper()} successfully added to badge {badge.BadgeID}\n\n"); }
+                doorsNotAlreadyOnBadge = doorsNotAlreadyOnBadge.Except(listOfAddedDoors).ToList();
+                Console.WriteLine($"Remaining availabel doors to add to {badge.BadgeID}: \n");
+                foreach (var door in doorsNotAlreadyOnBadge) { //foreach loop to print updated available door list
+                    Console.WriteLine(door);
+                }
+            }
+            _repo.AddDoorsToBadge(badge.BadgeID, listOfAddedDoors);
+            Console.WriteLine("Press any key to continue");
+            Console.ReadKey();
+        }
+
+        //Remove Doors
+        public void RemoveDoors(Badges badge) {
+            var listOfRemovedDoors = new List<string>();
+            Console.Clear();
+            Console.Write($"{badge.BadgeID} has access to the following doors:\n\n");
+            foreach (var currentDoor in badge.HasAccessTo) {
+                Console.WriteLine(currentDoor + " ");
+            }
+            int doorsToRemove;
+            do {
+                Console.WriteLine($"\n\nHow many doors do you wish to remove form {badge.BadgeID}?");
+                doorsToRemove = TryParse(Console.ReadLine());
+                if (doorsToRemove <= 0 || doorsToRemove > badge.HasAccessTo.Count) {
+                    Console.WriteLine("Please enter a valid number no greater than the number of doors on the list");
+                }
+            } while (doorsToRemove <= 0 || doorsToRemove > badge.HasAccessTo.Count);
+
+            for (int i = 0; i < doorsToRemove; i++) {
+                string input;
+                Console.WriteLine("Which door would you like to remove next?");
+                int count = listOfRemovedDoors.Count;
+                input = Console.ReadLine();
+                foreach (var door in badge.HasAccessTo) {
+
+                    if (input.ToLower() == door.ToLower()) {
+                        listOfRemovedDoors.Add(door);
+                    }
+                }
+                if (count == listOfRemovedDoors.Count) {
+                    Console.WriteLine($" {input} not a valid selection and was not successfully removed from badge {badge.BadgeID}\n\n");
+                }
+                else { Console.WriteLine($" {input.ToUpper()} successfully removed from badge {badge.BadgeID}\n\n"); }
+                var tempEditedList = badge.HasAccessTo.Except(listOfRemovedDoors).ToList();
+                Console.WriteLine($"\nRemaining doors accessible by {badge.BadgeID}: \n");
+                foreach (var door in tempEditedList) { //foreach loop to print updated available door list
+                    Console.WriteLine(door);
+                }
+            }
+            _repo.RemoveDoorsFromBadge(badge.BadgeID, listOfRemovedDoors);
+            Console.WriteLine("Press any key to continue");
+            Console.ReadKey();
+
+        }
+
+        //Deactivate Badge
+        public void DeactivateBadge(Badges badge) {
+            string yn;
+            Console.WriteLine($"Are you sure you want to deactivate this badge {badge.BadgeID}?  This cannot be undone!");
+            yn = Console.ReadLine();
+            if (!YesOrNO(yn)) {
+                Console.WriteLine("Press any key to return to the previous menu");
+                Console.ReadKey();
+                return;
+            }
+            else {
+                Console.WriteLine($"Be sure to destroy badge {badge.BadgeID}.  For security purposes, a deactivated badge\n" +
+             $"will be treated as if lost or stolen.  Door handles will be electified if the card \nattempts to access a \nforbidden door. " +
+             $"The deactivation is permanent. \n\n\nCarefully type in the badgeID to permanently deactivate");
+            }
+            int confirm = TryParse(Console.ReadLine());
+            if (confirm == badge.BadgeID) {
+                _repo.DeactivateBadge(badge.BadgeID);
+                Console.WriteLine($"Badge {badge.BadgeID} has been deactivated");
+            }
+            else {
+                Console.WriteLine("Not a match.  Please try again later");
+            }
+            Console.WriteLine("Press any key to return to the previous menu");
+            Console.ReadKey();
+
+        }
+
+
+
+        //Add 
         public void AddBadge() {
+            Console.Clear();
+            string yn;
+            var doorsForNewBadge = new List<string>();
+            var doorsList = _repo.ListOfDoors();
+            int numOfDoors;
+            string name;
             var newBadge = new Badges();
+            newBadge.BadgeID = BadgeIDAssignment();
+            do {
+                Console.WriteLine($"What is the name of the employee you wish to assign to this new badge?");
+                name = Console.ReadLine();
+                Console.WriteLine($"You entered {name}.  Is this correct?  The name cannot be changed after badge is assigned");
+                yn = Console.ReadLine();
+                if (!YesOrNO(yn)) { 
+                    Console.Clear();
+                    Console.WriteLine("Please enter the name again");
+                }
+                newBadge.EmployeeName = name;
+            } while (!YesOrNO(yn));
+            Console.Clear();
+            Console.WriteLine("Doors");
+            foreach (var door in doorsList) { Console.WriteLine(door); }
+            Console.WriteLine("Would you like to assign door access at this time?");
+            yn = Console.ReadLine();
+            if (YesOrNO(yn)) {
+                do {
+                    Console.WriteLine($"How many doors would you like grant to {name} access to?");
+                    numOfDoors = TryParse(Console.ReadLine());
+                    if (numOfDoors <= 0 || numOfDoors > doorsList.Count) {
+                        Console.WriteLine("Please enter a valid number no greater than the number of doors on the list");
 
+                    }
+                    else {
+                        for (int i = 0; i < numOfDoors; i++) {
+                            int count = doorsForNewBadge.Count;
+                            Console.WriteLine("Which door would you like to assign next?");
+                            string nextDoor = Console.ReadLine();
+                            foreach (var door in doorsList) {
+                                if (door == nextDoor.ToUpper()) {
+                                    doorsForNewBadge.Add(nextDoor.ToUpper());
+                                }
+                            }
+                            if (count == doorsForNewBadge.Count) {
+                                Console.WriteLine($"{nextDoor} is not a valid door from the list and was not added");
+
+                            }
+                        }
+                    }
+                } while (numOfDoors <= 0 || numOfDoors > doorsList.Count);
+            }
+            Console.Clear();
+
+                Console.WriteLine("Your new badge will be automatically assigned an ID and the information is as follows:\n");
+                Console.Write($"New BadgeID: {newBadge.BadgeID}\n" +
+                              $"Employeed Name:  {newBadge.EmployeeName}\n" +
+                              $"Door Access:  ");
+                foreach (var door in doorsForNewBadge) {
+                    Console.Write(door + " ");
+                }
+            Console.WriteLine("\n\nName and badge number cannot be changed, but door access can be updated later.\n" +
+                "Would you like to add this new badge now?");
+            yn = Console.ReadLine();
+            if (YesOrNO(yn)) {
+                newBadge.HasAccessTo = doorsForNewBadge;
+                _repo.CreateNewBadge(newBadge.BadgeID, newBadge);
+                Console.WriteLine("Congratulations!  Your new badge is activated.");
+            }
+            else { Console.WriteLine("Sorry about that!  Please try again."); 
+            }
+            Console.WriteLine("Press any key to continue");
+            Console.ReadKey();
+         
         }
 
 
@@ -214,6 +354,26 @@ namespace Challenge_3_Console {
             return k;
 
         }
+
+        public bool YesOrNO(string yn) {
+        Bool:
+            
+            do {
+                if (yn.ToLower() == "y") {
+                    return true;
+                }
+                else if (yn.ToLower() == "n") {
+                    return false;
+                }
+                else {
+                    Console.WriteLine("Please enter a 'y' or 'n'");
+                    yn = Console.ReadLine();
+                    goto Bool; //goto and label scheme because bool was saying not all paths return value(even though it should because it is in a do while loop
+                }
+
+            } while (yn != "y" && yn != "n");
+        }
+
         public int BadgeIDAssignment() {
             nextBadgeNumber++;
             return nextBadgeNumber;

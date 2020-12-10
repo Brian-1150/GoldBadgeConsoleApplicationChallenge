@@ -31,8 +31,15 @@ namespace Challenge_3_Repository {
             badgeToUpdate.HasAccessTo.AddRange(doorsAdded);   // = updatedBadge.HasAccessTo;
         }
 
-        public void RemoveDoorsFromBadge(int key, Badges updatedBadge) {
+        public void RemoveDoorsFromBadge(int key, List<string> doorsRemoved) {
+            var badgeToUpdate = GetBadgeByKey(key);
+            badgeToUpdate.HasAccessTo = badgeToUpdate.HasAccessTo.Except(doorsRemoved).ToList(); //changes original list to everything minus the new doorsRemoved list
 
+        }
+        public void DeactivateBadge(int key) {
+            var badgeToUpdate = GetBadgeByKey(key);
+            badgeToUpdate.EmployeeName = "DEACTIVATED";
+            badgeToUpdate.HasAccessTo.Clear();
         }
         //Delete
 
