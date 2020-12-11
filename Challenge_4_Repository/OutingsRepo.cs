@@ -30,19 +30,37 @@ namespace Challenge_4_Repository {
         //Update
         public void UpdateOuting(Outings oldOuting, Outings newOuting) {
 
-            oldOuting.Attendance = newOuting.Attendance;
-            oldOuting.CostPerPerson = newOuting.CostPerPerson;
-            oldOuting.DateOfEvent = newOuting.DateOfEvent;
-            oldOuting.TypeOfOuting = newOuting.TypeOfOuting;
+            if (newOuting.Attendance != oldOuting.Attendance) {
+                oldOuting.Attendance = newOuting.Attendance;
+            }
+            if (newOuting.CostPerPerson != oldOuting.CostPerPerson) {
+                oldOuting.CostPerPerson = newOuting.CostPerPerson;
+            }
+            if (newOuting.DateOfEvent != oldOuting.DateOfEvent) {
+                oldOuting.DateOfEvent = newOuting.DateOfEvent;
+            }
+            if (newOuting.TypeOfOuting != oldOuting.TypeOfOuting) {
+                oldOuting.TypeOfOuting = newOuting.TypeOfOuting;
+            }
         }
         //Delete
-
+        public bool DeleteOuting(Outings outingToRemove) {
+            int count =_ListOfOutings.Count();
+            _ListOfOutings.Remove(outingToRemove);
+            if (count > _ListOfOutings.Count()) {
+                return true;
+            }
+            else return false;
+        }
 
         //Helper Method
-        private Outings GetOutingByOuting(Outings outingToGet) {
+        public Outings GetOutingByDate(DateTime date) {
             foreach (var outing in _ListOfOutings) {
-
-            }
+                if (date == outing.DateOfEvent) {
+                    return outing;
+                }
+             
+            }return null;
         }
 
 

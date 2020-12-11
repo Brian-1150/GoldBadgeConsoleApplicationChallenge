@@ -42,22 +42,33 @@ namespace Challenge_4_Tests {
             Assert.AreEqual(_repo.ListOfOutings().Count, 6); //2 seeds plus the array of 4 = 6
         }
         [TestMethod]
-        public void TestMethod3() {
+        public void Update() {
 
             //Arrange
-
+            var newOuting = new Outings();
+            newOuting.Attendance = 1;
+            newOuting.DateOfEvent = new DateTime(2020, 5, 1);
+            newOuting.CostPerPerson = 3.5;
+            newOuting.TypeOfOuting = OutingType.Golf;
+            var x = _repo.GetOutingByDate(new DateTime(2020, 10, 31));
             //Act
-
+           
+            _repo.UpdateOuting(x, newOuting);
+           
             //Assert
+            Assert.AreEqual(_repo.GetOutingByDate(new DateTime(2020, 5, 1)).CostPerPerson, newOuting.CostPerPerson);
+            //the update is only outing to have 3.50 costPerPerson
         }
         [TestMethod]
-        public void TestMethod4() {
+        public void Delete() {
 
             //Arrange
-
+            var x = _repo.GetOutingByDate(new DateTime(2020, 10, 31));
             //Act
-
+            bool didItWork= _repo.DeleteOuting(x);
             //Assert
+            Assert.IsNull(_repo.GetOutingByDate(new DateTime(2020, 10, 31))); //try to pull same outing after deleted
+            Assert.IsTrue(didItWork); //check bool that method returns
         }
         [TestMethod]
         public void TestMethod5() {
