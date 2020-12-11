@@ -24,7 +24,6 @@ namespace Challenge_3_Repository {
             return _Doors;
         }
 
-
         //Update
         public void AddDoorsToBadge(int key, List<string> doorsAdded) {
             var badgeToUpdate = GetBadgeByKey(key);

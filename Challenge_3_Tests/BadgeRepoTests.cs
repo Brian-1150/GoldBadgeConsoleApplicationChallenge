@@ -3,6 +3,7 @@ using System;
 using Challenge_3_Repository;
 using System.Collections.Generic;
 
+
 namespace Challenge_3_Tests {
     [TestClass]
     public class BadgeRepoTests {
@@ -30,6 +31,8 @@ namespace Challenge_3_Tests {
             //Assert
             Assert.IsNotNull(x);
             Assert.IsTrue(x.Count > 0);
+            
+
         }
         [TestMethod]
         public void ViewDoors() {
