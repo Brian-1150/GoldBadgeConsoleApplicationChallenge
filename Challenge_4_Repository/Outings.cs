@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Challenge_4_Repository {
 
     public enum OutingType {
-        Amusement_Park = 1, //enum must be one word like variable names
+        Theme_Park = 1, //enum must be one word like variable names
         Bowling,
         Concert,
         Golf
@@ -29,6 +29,7 @@ namespace Challenge_4_Repository {
             Attendance = att;
             DateOfEvent = date;
             CostPerPerson = costPerPerson;
+            TypeOfOuting = typeOfOuting;
            
         }
 
