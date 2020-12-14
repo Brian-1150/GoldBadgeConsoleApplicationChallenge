@@ -20,7 +20,7 @@ namespace Challenge_4_Console {
             bool exit = false;
             while (exit == false) {
                 Console.WriteLine("     ****Main Menu****\n\n\n" +
-                                  "Please make a selection\n" +
+                                  "Please make a selection\n\n" +
                                   "1.  View Outing Details\n" +
                                   "2.  Add a New Outing\n" +
                                   "3.  Edit Detials for an Outing\n" +
@@ -51,26 +51,11 @@ namespace Challenge_4_Console {
             }
         }
 
-        //public void ViewAllOutings() {
-        //    var list = _repo.ListOfOutings();
-        //    Console.WriteLine("\t\t\t\tCOST PER");
-        //    Console.WriteLine("DATE\t\tEVENT TYPE\t PERSON\t\tTOTAL COST\n\n");
-        //    foreach (var outing in list) {
-        //        if (outing.TypeOfOuting == OutingType.Theme_Park) {
-        //            Console.WriteLine($"{outing.DateOfEvent.ToShortDateString()}\t{outing.TypeOfOuting}\t" +
-        //                $"${outing.CostPerPerson.ToString("#,#")}\t\t${outing.EventCost.ToString("#,#")}");
-        //        }
-        //        else {
-        //            Console.WriteLine($"{outing.DateOfEvent.ToShortDateString()}\t{outing.TypeOfOuting}\t\t" +
-        //                $"${outing.CostPerPerson.ToString("#,#")}\t\t${outing.EventCost.ToString("#,#")}");
-        //        }
-        //    }
 
-        //}
         //View
         public void ViewOutingsByDate() {
             Console.Clear();
-            double total = 0;
+            decimal total = 0;
             var list = ListOfOutingsByDate();
             Console.WriteLine("\t\t\t\tCOST PER");
             Console.WriteLine("DATE\t\tEVENT TYPE\t PERSON\t\tTOTAL COST\n\n");
@@ -78,15 +63,16 @@ namespace Challenge_4_Console {
                 if (outing.TypeOfOuting == OutingType.Theme_Park) {
                     Console.WriteLine($"{outing.DateOfEvent.ToShortDateString()}\t{outing.TypeOfOuting}\t" +
                         $"${outing.CostPerPerson.ToString("#,#")}\t\t${outing.EventCost.ToString("#,#")}");
-                    total += outing.EventCost;
+                    total += outing.EventCost; //we could show decimal if we wanted To.String("#,#.00")
                 }
                 else {
                     Console.WriteLine($"{outing.DateOfEvent.ToShortDateString()}\t{outing.TypeOfOuting}\t\t" +
-                        $"${outing.CostPerPerson.ToString("#,#")}\t\t${outing.EventCost.ToString("#,#")}");
+                        $"${outing.CostPerPerson.ToString("#,#.")}\t\t${outing.EventCost.ToString("#,#")}");
                     total += outing.EventCost;
                 }
             }
-            Console.WriteLine($"Total combined cost for all outings this year:  ${total}\n");
+            Console.WriteLine($"\nTotal combined cost for all outings this year:  ${total.ToString("#,#")}\n" +
+                $"*values are rounded to nearest dollar for convenience\n\n");
             Console.WriteLine("\nWould you like to refine resuts by category? y/n");
             if (!YesOrNO(Console.ReadLine())) { return; }
             OutingSubMenu();
@@ -103,7 +89,7 @@ namespace Challenge_4_Console {
                 "4.  Concert\n" +
                 "5.  Exit");
                 string input = Console.ReadLine();
-                double total = 0;
+                decimal total = 0;
                 switch (input) {
                     case "1": //Bowling
                         var bowlingList = ListByCategory("1");
@@ -169,9 +155,16 @@ namespace Challenge_4_Console {
         //Add
         public void AddNewOuting() {
             Console.Clear();
-            Console.WriteLine("What type of outing would you like to add?");
-            Console.WriteLine("1.  Theme Park\n2.  Bowling\n3.  Concert\n4.  Golf");
-            int type = TryParse(Console.ReadLine());
+            int type;
+            DateTime date = new DateTime(1111, 11, 11);
+            
+            do {
+                Console.WriteLine("Enter the category index number of the type");
+                Console.WriteLine("1.  Theme Park\n2.  Bowling\n3.  Concert\n4.  Golf");
+                type = TryParse(Console.ReadLine());
+               
+                if (type < 1 || type > 4) { Console.WriteLine("Please choose a number 1-4"); }
+            } while (type < 1 || type > 4);
             Console.WriteLine("When did this event take place?  Please enter the four digit year. ex(2020)");
             int year = TryParse(Console.ReadLine());
             Console.WriteLine("Now enter the two digit month.  ex (01 for January)");
@@ -181,14 +174,105 @@ namespace Challenge_4_Console {
             Console.WriteLine("How many people attended the event?");
             int attendance = TryParse(Console.ReadLine());
             Console.WriteLine("What was the cost per person?");
-            double cost = TryParseDouble(Console.ReadLine());//rounding up??????
-            var newOuting = new Outings(attendance, new DateTime(year, month, day), cost, (OutingType)type);
+            decimal cost = TryParseDec(Console.ReadLine());
+            try {
+               date = new DateTime(year, month, day); //try.catch for invalid day month or year
+            } catch (Exception badDate) {
+                Console.WriteLine($"The date you entered({month}/{day}/{year}) is invalid and will not be added.  Default date is 11/11/1111.\n" +
+                    $"You can edit this outing from the main menu later.");
+            }
+            var newOuting = new Outings(attendance, date, cost, (OutingType)type);
             _repo.AddListingToList(newOuting);
-
-        }
+        
+            }
+        
 
         //Edit
         public void EditOuting() {
+            int index = 1;
+            var list = _repo.ListOfOutings();
+            Console.WriteLine("  \t\t\t\tCOST PER");
+            Console.WriteLine("  DATE\t\tEVENT TYPE\t PERSON\t\tTOTAL COST\n\n");
+            foreach (var outing in list) {
+                Console.Write(index + "  ");
+                if (outing.TypeOfOuting == OutingType.Theme_Park) {
+                    Console.WriteLine($"{outing.DateOfEvent.ToShortDateString()}\t{outing.TypeOfOuting}\t" +
+                        $"${outing.CostPerPerson.ToString("#,#")}\t\t${outing.EventCost.ToString("#,#")}");
+                    index++;
+                }
+                else {
+                    Console.WriteLine($"{outing.DateOfEvent.ToShortDateString()}\t{outing.TypeOfOuting}\t\t" +
+                        $"${outing.CostPerPerson.ToString("#,#")}\t\t${outing.EventCost.ToString("#,#")}");
+                    index++;
+                }
+            }
+            Console.WriteLine("Do you wish to edit one of these outings?");
+            if (!YesOrNO(Console.ReadLine())) { return; }
+            Console.WriteLine("Enter the index number of the event you wish to edit");
+            int choice = TryParse(Console.ReadLine());
+            while (choice > list.Count) {
+                Console.WriteLine("Please choose a valid index number");
+                choice = TryParse(Console.ReadLine());
+            }
+            var outingToEdit = list.ElementAt(choice - 1);
+
+            int type;
+            int year = outingToEdit.DateOfEvent.Year;
+            int month = outingToEdit.DateOfEvent.Month;
+            int day = outingToEdit.DateOfEvent.Day;
+            var date = outingToEdit.DateOfEvent;
+            var updatedOuting = new Outings();
+
+            int attendance = outingToEdit.Attendance; ;
+            decimal cost = outingToEdit.CostPerPerson; ;
+            OutingType newType = outingToEdit.TypeOfOuting;
+
+            Console.WriteLine($"Was this event canceled?  Choose 'y' to remove all evidence that this event was ever planned");
+            if (YesOrNO(Console.ReadLine())) {
+                if (_repo.DeleteOuting(outingToEdit)) {
+                    Console.WriteLine("Event has been removed");
+                }
+                else { Console.WriteLine("Failed to remove event.  So sorry!"); }
+                return;
+            }
+            Console.WriteLine("Do you wish to edit the date?");
+            if (YesOrNO(Console.ReadLine())) {
+                Console.WriteLine("When did this event take place?  Please enter the four digit year. ex(2020)");
+                year = TryParse(Console.ReadLine());
+                Console.WriteLine("Now enter the two digit month.  ex (01 for January)");
+                month = TryParse(Console.ReadLine());
+                Console.WriteLine("Now enter the two digit day. ex (11)");
+                day = TryParse(Console.ReadLine());
+                try {
+                    date = new DateTime(year, month, day); //try.catch for invalid month or year
+                } catch (Exception badDate) {
+                    Console.WriteLine($"The date you entered({month}/{day}/{year}) is invalid and will not be updated at this time");
+                }
+                Console.WriteLine("Do you wish to edit the attendance?");
+                if (YesOrNO(Console.ReadLine())) {
+                    Console.WriteLine("What was the actual attendance?");
+                    attendance = TryParse(Console.ReadLine());
+                }
+                Console.WriteLine("Do you need to change the cost per person at this time?");
+                if (YesOrNO(Console.ReadLine())) {
+                    Console.WriteLine("What was the actual cost per person?");
+                    cost = TryParseDec(Console.ReadLine());
+                }
+                Console.WriteLine($"Event was originally booked as {outingToEdit.TypeOfOuting}.  Do you need to change this?");
+                if (YesOrNO(Console.ReadLine())) {
+                    do {
+                        Console.WriteLine("Enter the category index number of the type");
+                        Console.WriteLine("1.  Theme Park\n2.  Bowling\n3.  Concert\n4.  Golf");
+                        type = TryParse(Console.ReadLine());
+                        newType = (OutingType)type;
+                        if (type < 1 || type > 4) { Console.WriteLine("Please choose a number 1-4"); }
+                    } while (type < 1 || type > 4);
+                }
+                
+                updatedOuting = new Outings(attendance, date, cost, newType);
+                _repo.UpdateOuting(outingToEdit, updatedOuting);
+                return;
+            }
 
         }
 
@@ -250,12 +334,12 @@ namespace Challenge_4_Console {
             }
             return k;
         }
-        public double TryParseDouble(string number) {
-            double.TryParse(number, out double k);
+        public decimal TryParseDec(string number) {
+            decimal.TryParse(number, out decimal k);
             while (k <= 0) {
                 Console.WriteLine("Please enter a valid number");
                 number = Console.ReadLine();
-                double.TryParse(number, out k);
+                decimal.TryParse(number, out k);
             }
             return k;
         }
@@ -279,10 +363,9 @@ namespace Challenge_4_Console {
             } while (yn != "y" && yn != "n");
         }
 
-
         //Seed
         private void Seed() {
-            Outings _seedOuting = new Outings(25, new DateTime(2020, 10, 31), 25, OutingType.Bowling);
+            Outings _seedOuting = new Outings(25, new DateTime(2020, 10, 31), 25.25m, OutingType.Bowling); //rounding issue
             Outings _seedOuting2 = new Outings(150, new DateTime(2020, 12, 31), 150, (OutingType)3);
             Outings _seedOuting3 = new Outings(50, new DateTime(2020, 10, 8), 1000, OutingType.Golf);
             Outings _seedOuting4 = new Outings(5, new DateTime(2020, 1, 1), 28, (OutingType)2);
