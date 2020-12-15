@@ -13,11 +13,11 @@ namespace Challenge_4_Repository {
         public void AddListingToList(Outings newOuting) {
             _ListOfOutings.Add(newOuting);
         }
-        public void AddListingToList(Outings one, Outings two) {
+        public void AddListingToList(Outings one, Outings two) { //overload for two objects
             _ListOfOutings.Add(one);
             _ListOfOutings.Add(two);
         }
-        public void AddListingToList(params Outings[] outings) {
+        public void AddListingToList(params Outings[] outings) { //overload for unlimited objects
             foreach (Outings occasion in outings) {
                 _ListOfOutings.Add(occasion);
             }

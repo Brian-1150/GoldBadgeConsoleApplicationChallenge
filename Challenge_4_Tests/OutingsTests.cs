@@ -48,7 +48,7 @@ namespace Challenge_4_Tests {
             var newOuting = new Outings();
             newOuting.Attendance = 1;
             newOuting.DateOfEvent = new DateTime(2020, 5, 1);
-            newOuting.CostPerPerson = 3.5;
+            newOuting.CostPerPerson = 3.5m;
             newOuting.TypeOfOuting = OutingType.Golf;
             var x = _repo.GetOutingByDate(new DateTime(2020, 10, 31));
             //Act
@@ -71,13 +71,14 @@ namespace Challenge_4_Tests {
             Assert.IsTrue(didItWork); //check bool that method returns
         }
         [TestMethod]
-        public void TestMethod5() {
+        public void ViewList() {
 
             //Arrange
-
+            //See initialize
             //Act
-
+            var x = _repo.ListOfOutings();
             //Assert
+            Assert.IsTrue(x.Count == 2);
         }
         [TestMethod]
         public void TestMethod6() {

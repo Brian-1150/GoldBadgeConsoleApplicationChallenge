@@ -9,13 +9,12 @@ namespace Challenge_4_Console {
     class ProgramUI4 {
         OutingsRepo _repo = new OutingsRepo();
 
-
         public void Run() {
             //Main Menu
             Seed();
             Menu();
-        }
 
+        }
         public void Menu() {
             bool exit = false;
             while (exit == false) {
@@ -51,7 +50,6 @@ namespace Challenge_4_Console {
             }
         }
 
-       
         //View
         public void ViewOutingsByDate() {
             Console.Clear();
@@ -148,7 +146,6 @@ namespace Challenge_4_Console {
                 }
                 Console.WriteLine("Please press any key to continue...");
                 Console.ReadKey();
-                
                 Console.Clear();
             }
         }
@@ -157,12 +154,12 @@ namespace Challenge_4_Console {
             Console.Clear();
             int type;
             DateTime date = new DateTime(1111, 11, 11);
-            
+
             do {
                 Console.WriteLine("Enter the category index number of the type");
                 Console.WriteLine("1.  Theme Park\n2.  Bowling\n3.  Concert\n4.  Golf");
                 type = TryParse(Console.ReadLine());
-               
+
                 if (type < 1 || type > 4) { Console.WriteLine("Please choose a number 1-4"); }
             } while (type < 1 || type > 4);
             Console.WriteLine("When did this event take place?  Please enter the four digit year. ex(2020)");
@@ -176,16 +173,15 @@ namespace Challenge_4_Console {
             Console.WriteLine("What was the cost per person?");
             decimal cost = TryParseDec(Console.ReadLine());
             try {
-               date = new DateTime(year, month, day); //try.catch for invalid day month or year
+                date = new DateTime(year, month, day); //try.catch for invalid day month or year
             } catch (Exception badDate) {
                 Console.WriteLine($"The date you entered({month}/{day}/{year}) is invalid and will not be added.  Default date is 11/11/1111.\n" +
                     $"You can edit this outing from the main menu later.");
             }
             var newOuting = new Outings(attendance, date, cost, (OutingType)type);
             _repo.AddListingToList(newOuting);
-        
-            }
-        
+
+        }
 
         //Edit
         public void EditOuting() {
@@ -273,14 +269,12 @@ namespace Challenge_4_Console {
                         if (type < 1 || type > 4) { Console.WriteLine("Please choose a number 1-4"); }
                     } while (type < 1 || type > 4);
                 }
-                
+
                 updatedOuting = new Outings(attendance, date, cost, newType);
                 _repo.UpdateOuting(outingToEdit, updatedOuting);
                 return;
             }
-
         }
-
         //Helper Methods
         //View by category
         public List<Outings> ListByCategory(string choice) {
