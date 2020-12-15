@@ -30,7 +30,7 @@ namespace Challenge_4_Repository {
         //Update
         public void UpdateOuting(Outings oldOuting, Outings newOuting) {
 
-            if (newOuting.Attendance != oldOuting.Attendance) {
+            if (newOuting.Attendance != oldOuting.Attendance) { 
                 oldOuting.Attendance = newOuting.Attendance;
             }
             if (newOuting.CostPerPerson != oldOuting.CostPerPerson) {

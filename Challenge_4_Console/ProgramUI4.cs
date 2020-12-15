@@ -51,7 +51,7 @@ namespace Challenge_4_Console {
             }
         }
 
-
+       
         //View
         public void ViewOutingsByDate() {
             Console.Clear();
@@ -71,7 +71,7 @@ namespace Challenge_4_Console {
                     total += outing.EventCost;
                 }
             }
-            Console.WriteLine($"\nTotal combined cost for all outings this year:  ${total.ToString("#,#")}\n" +
+            Console.WriteLine($"\nTotal combined cost for all outings :\t  ${total.ToString("#,#")}\n" +
                 $"*values are rounded to nearest dollar for convenience\n\n");
             Console.WriteLine("\nWould you like to refine resuts by category? y/n");
             if (!YesOrNO(Console.ReadLine())) { return; }
@@ -87,7 +87,7 @@ namespace Challenge_4_Console {
                 "2.  Golf\n" +
                 "3.  Theme Park\n" +
                 "4.  Concert\n" +
-                "5.  Exit");
+                "5.  Return to Main Menu");
                 string input = Console.ReadLine();
                 decimal total = 0;
                 switch (input) {
@@ -101,7 +101,7 @@ namespace Challenge_4_Console {
                         $"${outing.CostPerPerson.ToString("#,#")}\t\t{outing.Attendance}\t\t${outing.EventCost.ToString("#,#")}");
                             total += outing.EventCost;
                         }
-                        Console.WriteLine($"\nTotal cost for all bowling events this year:\t\t\t${total.ToString("#,#")}\n");
+                        Console.WriteLine($"\nTotal cost for all bowling events :\t\t\t ${total.ToString("#,#")}\n");
                         break;
                     case "2": //Golf
                         var golfList = ListByCategory("2");
@@ -113,7 +113,7 @@ namespace Challenge_4_Console {
                         $"${outing.CostPerPerson.ToString("#,#")}\t\t{outing.Attendance}\t\t${outing.EventCost.ToString("#,#")}");
                             total += outing.EventCost;
                         }
-                        Console.WriteLine($"\nTotal cost for all golf events this year: \t\t        ${total.ToString("#,#")}\n");
+                        Console.WriteLine($"\nTotal cost for all golf events :   \t\t        ${total.ToString("#,#")}\n");
                         break;
                     case "3": //Theme Park
                         var themeParkList = ListByCategory("3");
@@ -125,7 +125,7 @@ namespace Challenge_4_Console {
                         $"${outing.CostPerPerson.ToString("#,#")}\t\t{outing.Attendance}\t\t${outing.EventCost.ToString("#,#")}");
                             total += outing.EventCost;
                         }
-                        Console.WriteLine($"\nTotal cost for all bowling events this year: \t\t        ${total.ToString("#,#")}\n");
+                        Console.WriteLine($"\nTotal cost for all bowling events: \t\t          ${total.ToString("#,#")}\n");
                         break;
                     case "4": //Concert
                         var concertList = ListByCategory("4");
@@ -137,7 +137,7 @@ namespace Challenge_4_Console {
                          $" ${outing.CostPerPerson.ToString("#,#")}\t\t{outing.Attendance}\t\t${outing.EventCost.ToString("#,#")}");
                             total += outing.EventCost;
                         }
-                        Console.WriteLine($"\nTotal cost for all bowling events this year: \t\t        ${total.ToString("#,#")}\n");
+                        Console.WriteLine($"\nTotal cost for all bowling events : \t\t        ${total.ToString("#,#")}\n");
                         break;
                     case "5": //Return
                         exit = true;
@@ -148,7 +148,7 @@ namespace Challenge_4_Console {
                 }
                 Console.WriteLine("Please press any key to continue...");
                 Console.ReadKey();
-
+                
                 Console.Clear();
             }
         }
@@ -215,6 +215,11 @@ namespace Challenge_4_Console {
                 choice = TryParse(Console.ReadLine());
             }
             var outingToEdit = list.ElementAt(choice - 1);
+            Console.Clear();
+            Console.WriteLine("\t\t\t\tCOST PER");
+            Console.WriteLine("DATE\t\tEVENT TYPE\t PERSON\t\tATTENDANCE\tTOTAL COST\n\n");
+            Console.WriteLine($"{outingToEdit.DateOfEvent.ToShortDateString()}\t{outingToEdit.TypeOfOuting}\t" +
+                        $"\t${outingToEdit.CostPerPerson.ToString("#,#")}\t\t{outingToEdit.Attendance}\t\t${outingToEdit.EventCost.ToString("#,#")}");
 
             int type;
             int year = outingToEdit.DateOfEvent.Year;
