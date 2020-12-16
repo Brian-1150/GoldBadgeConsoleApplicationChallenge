@@ -15,7 +15,7 @@ namespace Challenge_4_Console {
             Menu();
 
         }
-        public void Menu() {
+        private void Menu() {
             bool exit = false;
             while (exit == false) {
                 Console.WriteLine("     ****Main Menu****\n\n\n" +
@@ -51,7 +51,7 @@ namespace Challenge_4_Console {
         }
 
         //View
-        public void ViewOutingsByDate() {
+        private void ViewOutingsByDate() {
             Console.Clear();
             decimal total = 0;
             var list = ListOfOutingsByDate();
@@ -76,7 +76,7 @@ namespace Challenge_4_Console {
             OutingSubMenu();
         }
         //View Submenu
-        public void OutingSubMenu() {
+        private void OutingSubMenu() {
             Console.Clear();
             bool exit = false;
             while (exit == false) {
@@ -150,7 +150,7 @@ namespace Challenge_4_Console {
             }
         }
         //Add
-        public void AddNewOuting() {
+        private void AddNewOuting() {
             Console.Clear();
             int type;
             DateTime date = new DateTime(1111, 11, 11);
@@ -184,7 +184,7 @@ namespace Challenge_4_Console {
         }
 
         //Edit
-        public void EditOuting() {
+        private void EditOuting() {
             int index = 1;
             var list = _repo.ListOfOutings();
             Console.WriteLine("  \t\t\t\tCOST PER");
@@ -277,7 +277,7 @@ namespace Challenge_4_Console {
         }
         //Helper Methods
         //View by category
-        public List<Outings> ListByCategory(string choice) {
+        private List<Outings> ListByCategory(string choice) {
             var tempList = new List<Outings>();
             var list = _repo.ListOfOutings();
             switch (choice) {
@@ -316,14 +316,14 @@ namespace Challenge_4_Console {
             return tempList;
         }
 
-        public List<Outings> ListOfOutingsByDate() {
+        private List<Outings> ListOfOutingsByDate() {
             var list = _repo.ListOfOutings();
             list.Sort((a, b) => a.DateOfEvent.CompareTo(b.DateOfEvent));
             return list;
         }
 
         //Parse
-        public int TryParse(string number) {
+        private int TryParse(string number) {
 
             int.TryParse(number, out int k);
             while (k <= 0) {
@@ -333,7 +333,7 @@ namespace Challenge_4_Console {
             }
             return k;
         }
-        public decimal TryParseDec(string number) {
+        private decimal TryParseDec(string number) {
             decimal.TryParse(number, out decimal k);
             while (k <= 0) {
                 Console.WriteLine("Please enter a valid number");
@@ -343,7 +343,7 @@ namespace Challenge_4_Console {
             return k;
         }
         //Yes/No
-        public bool YesOrNO(string yn) {
+        private bool YesOrNO(string yn) {
         Bool:
 
             do {

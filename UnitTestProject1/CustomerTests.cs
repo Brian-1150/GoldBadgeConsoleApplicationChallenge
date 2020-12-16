@@ -16,18 +16,13 @@ namespace Challenge_5_Tests {
             _repo.AddToList(_seedCustomer2, _seedCustomer);
         }
 
-
-
-
-
-
         [TestMethod]
         public void View() {
             //Arrange
 
             //Act
-            var x = _repo.ListOfCustomers("1");
-            var y = _repo.ListOfCustomers("2");
+            var x = _repo.ListOfCustomers(1);
+            var y = _repo.ListOfCustomers(2);
             //Assert
             Assert.IsNotNull(x);
             Assert.AreEqual(y.Count, 1);
@@ -46,7 +41,7 @@ namespace Challenge_5_Tests {
             var x = _repo.ListOfCustomers();
             var y = x.ElementAt(2);
             //Assert
-            Assert.IsTrue(_repo.ListOfCustomers("4").Count == 4);
+            Assert.IsTrue(_repo.ListOfCustomers(4).Count == 4);
             Assert.IsTrue(y.LastName == null);
         }
 

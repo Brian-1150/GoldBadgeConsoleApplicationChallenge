@@ -16,39 +16,50 @@ namespace Challenge_5_Repository {
             _ListOfCustomers.Add(one);
             _ListOfCustomers.Add(two);
         }
+        public void AddToList(params Customer[] customerArray) { //overload for unlimited objects
+            foreach (Customer customer in customerArray) {
+                _ListOfCustomers.Add(customer);
+            }
+        }
         //Read
-        public List<Customer> ListOfCustomers(string x) {
+        public List<Customer> ListOfCustomers(int x) {
             var tempList = new List<Customer>();
-            foreach (var cust in _ListOfCustomers) {
+           // foreach (var cust in _ListOfCustomers) does not work outside of switch
+           //must be recoded inside each case
 
                 switch (x) {
-                    case "1":
+                    case 1:
+                    foreach (var cust in _ListOfCustomers) {
                         if (cust.StatusOfCustomer == CustomerStatus.Current) {
                             tempList.Add(cust);
-                        }
+                        }                      }
                         return tempList;
                        
-                    case "2":
+                    case 2:
+                    foreach (var cust in _ListOfCustomers) {
                         if (cust.StatusOfCustomer == CustomerStatus.Past) {
                             tempList.Add(cust);
-                        }
+                        }   }
                         return tempList;
                        
-                    case "3":
+                    case 3:
+                    foreach (var cust in _ListOfCustomers) {
                         if (cust.StatusOfCustomer == CustomerStatus.Prospective) {
                             tempList.Add(cust);
                         }
+                    }
                         return tempList;
                        
-                    case "4":
+                    case 4:
                         return _ListOfCustomers;
                        
                     default:
                         return null;
                         
                 }
-            } return null;
-        }
+            
+        } 
+        
         public List<Customer> ListOfCustomers() {
             return _ListOfCustomers;
         }
