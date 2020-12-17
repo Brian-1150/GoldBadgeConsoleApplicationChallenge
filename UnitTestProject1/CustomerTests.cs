@@ -38,30 +38,32 @@ namespace Challenge_5_Tests {
             _seedCustomer3.Email = "ellen@elevenfifty.com";
             //Act
             _repo.AddToList(_seedCustomer4, _seedCustomer3);
-            var x = _repo.ListOfCustomers();
-            var y = x.ElementAt(2);
+           
             //Assert
             Assert.IsTrue(_repo.ListOfCustomers(4).Count == 4);
-            Assert.IsTrue(y.LastName == null);
+            
         }
 
-        [TestMethod]
-        public void Delete() {
-
-            //Arrange
-
-            //Act
-
-            //Assert
-        }
         [TestMethod]
         public void Update() {
 
             //Arrange
+            Customer replacement = new Customer((CustomerStatus)3, "Jack", "Johnson", "377-317-3173", "jj@elevenfifty.com");
 
             //Act
-
+            _repo.EditCustomer(_seedCustomer, replacement);
             //Assert
+            Assert.IsTrue (_seedCustomer.FirstName == "Jack");
+        }
+        [TestMethod]
+        public void Delete() {
+
+            //Arrange
+            int x = _repo.ListOfCustomers().Count;
+            //Act
+            _repo.DeleteCustomer(_seedCustomer2);
+            //Assert
+            Assert.AreNotEqual(x, _repo.ListOfCustomers().Count);
         }
         [TestMethod]
         public void Test() {

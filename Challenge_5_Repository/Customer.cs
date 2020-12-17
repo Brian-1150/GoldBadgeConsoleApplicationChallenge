@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Challenge_5_Repository {
 
-    abstract public class Person {                                      
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string PhoneNumber { get; set; }
-        public string Email { get; set; }
+    abstract public class Person {
+        public string FirstName { get; set; } = ""; //setting these equal to prevent null exception when searching
+        public string LastName { get; set; } = "";
+        public string PhoneNumber { get; set; } = "";
+        public string Email { get; set; } = "";
 
-        public Person() { }
+        public Person() { }// I could remove empty constructor  to require all info to also prevent null exception
         public Person(string firstName, string lastName, string phoneNumber, string email) {
             FirstName = firstName;
             LastName = lastName;
