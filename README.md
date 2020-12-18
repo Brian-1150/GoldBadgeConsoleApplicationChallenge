@@ -53,3 +53,5 @@ in the UI is a search method.  This allows the user to search for a customer wit
                                  
                                  ******Challenge 8********
 
+In this challenge we were given the most freedom.  It was really fun to get creative with objects and properties.  I was able to call and inherit from multiple challenges
+and classes.  Additonally, I discovered how to build more extensive logic into the properties.  
