@@ -28,3 +28,28 @@ I created a submenu, where I could have just set up some y/n questions about wha
 see how it would work.  It turned out well and I will be using it again.  I used a sort feature when printing the list of doors for the user so even if doors get added
 on, it shows them in a nice sequential order.  When adding or removing doors, the list is updated so user only sees which ones are available.  The code is very clean compared
 to the previous two challenges.  
+
+                                    ******Challenge 4*******
+                                   
+This challenge gave me an opportunity to try a few new things.  First off, I learned how to implement a calculation into one of the object properties.  So the totoal event cost 
+has a get only with a return of the calculation from two other properties.  There is no setter so it cannot be set outside of this calculation.  A second thing I implemented
+for the first time was a tactic for adding an unlimited number of objects at one time by using an overload of an array in my add method in the repo.  It came in handy while
+seeding the UI.  I am interested to see how useful this could be in other situations.  Also I used "try/catch" in place of an if statement to learn how those work.  Lastly, 
+I used string formatting to manipulate how number, dollars, and decimal places will print to the console.  
+
+                                  ******Challenge 5********
+                                  
+This program is used to mimic a database of customers and their status.  Each customer will get sent an email based on their status.  The status is either current customer, 
+previous customer, or prospective customer and the emails are drafted appropriately.  This program makes use of inheritance by creating an abstract person object and inheriting
+those properties into the customer object.  I then use the customer object in another challenge in this same solution later.  A first time in this assembly was using string
+formatting to line up a table, as opposed to using \t\t\t so much.  I also made a change to my Yes/No helper method and removed the goto and label scheme from it.  Also inlcuded
+in the UI is a search method.  This allows the user to search for a customer without knowing all of their information.  
+
+                                 ******Challenge 6*********
+                                 
+                                 
+                                 ******Challenge 7*********
+                                 
+                                 
+                                 ******Challenge 8********
+
