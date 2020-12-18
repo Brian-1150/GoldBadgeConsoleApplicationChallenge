@@ -96,7 +96,7 @@ namespace Challenge_8_Console {
             Driver seed4 = new Driver(vehicle3, (CustomerStatus)1, "Jack", "Johnson", "377-317-3173", "jj@elevenfifty.com");
             Driver seed5 = new Driver(vehicle4, CustomerStatus.Current, "Elli", "Belly", "123-456-7890", "Ellbell@123.org");
             Driver seed2 = new Driver(vehicle4, (CustomerStatus)1, "Sean", "Stevens", "555-555-5555", "@gmail.com");
-            _repo.AddDriver(seed5, seed4, seed3, seed1);
+            _repo.AddDriver(seed5, seed4, seed3, seed1, seed2);
         }
 
 
