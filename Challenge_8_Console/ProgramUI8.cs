@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Challenge_8_Repository;
+using Challenge_6_Repository;
+using Challenge_5_Repository;
 
 namespace Challenge_8_Console {
     public class ProgramUI8 {
@@ -56,7 +58,12 @@ namespace Challenge_8_Console {
 
         //View
         private void ViewDrivers() {
+           var dictionary = _repo.GetDictionaryOfDrivers();
+            Console.Write("{0,-12} {1,-12} {2, -25} {3, -15} {4, 0}\n\n", "CustomerID", "Last Name", "First Name", "Points", "Monthly Premium");
+            foreach (KeyValuePair<int, Driver> driver in dictionary) {
+                Console.WriteLine("{0,-12} {1,-12} {2, -25} {3, -15} {4, 0}", driver.Value.CustomerID, driver.Value.LastName, driver.Value.FirstName, driver.Value.Points.ToString("#,#.##"), driver.Value.Premium.ToString("#,#.##"));
 
+            }
         }
         //Add
         private void AddDriver() {
@@ -80,7 +87,16 @@ namespace Challenge_8_Console {
 
         //Seed
         private void Seed() {
-
+            Vehicle vehicle1 = new Vehicle("Dodge Grand Caravan", 27000, Vehicle.VehicleType.Van);
+            Vehicle vehicle2 = new Vehicle("Honda Civic", 18000, Vehicle.VehicleType.Sedan);
+            Vehicle vehicle3 = new Vehicle("Ford Mustang", 32000, Vehicle.VehicleType.Coupe);
+            Vehicle vehicle4 = new Vehicle("Chevrolet Silverado", 42000, Vehicle.VehicleType.Truck);
+            Driver seed1 = new Driver(vehicle1, CustomerStatus.Current, "Brian", "Campassi", "317-123-4567", "brian@1150.edu");
+            Driver seed3 = new Driver(vehicle2, (CustomerStatus)1, "Joe", "Johnson", "317-317-3173", "joe@elevenfifty.com");
+            Driver seed4 = new Driver(vehicle3, (CustomerStatus)1, "Jack", "Johnson", "377-317-3173", "jj@elevenfifty.com");
+            Driver seed5 = new Driver(vehicle4, CustomerStatus.Current, "Elli", "Belly", "123-456-7890", "Ellbell@123.org");
+            Driver seed2 = new Driver(vehicle4, (CustomerStatus)1, "Sean", "Stevens", "555-555-5555", "@gmail.com");
+            _repo.AddDriver(seed5, seed4, seed3, seed1);
         }
 
 

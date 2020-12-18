@@ -16,6 +16,13 @@ namespace Challenge_8_Repository {
             _ListOfDriversAllTIme.Add(newDriver);
             driverKeyCount++;
         }
+        public void AddDriver(params Driver[] driverArray) { //overload for unlimited objects
+            foreach (Driver driver in driverArray) {
+                driver.CustomerID = driverKeyCount;
+                _DictionaryOfDrivers.Add(driverKeyCount, driver);
+                driverKeyCount++;
+            }
+        }
         //Read
         public Dictionary<int, Driver> GetDictionaryOfDrivers() {
             return _DictionaryOfDrivers;

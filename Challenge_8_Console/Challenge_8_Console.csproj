@@ -50,5 +50,19 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Challenge_5_Repository\Challenge_5_Repository.csproj">
+      <Project>{61957ecb-83c3-4fa9-96e3-ca0ec71daa93}</Project>
+      <Name>Challenge_5_Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Challenge_6_Repository\Challenge_6_Repository.csproj">
+      <Project>{4b7fc776-530f-4717-a389-164335fdd4d8}</Project>
+      <Name>Challenge_6_Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Challenge_8_Repository\Challenge_8_Repository.csproj">
+      <Project>{b0efbe93-03bd-44ec-95e3-459ce4ec7e84}</Project>
+      <Name>Challenge_8_Repository</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
