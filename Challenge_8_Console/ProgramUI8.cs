@@ -67,11 +67,29 @@ namespace Challenge_8_Console {
         }
         //Add
         private void AddDriver() {
-
-        }
+            var sb = new StringBuilder();
+            Console.WriteLine("From here you will be able to add a new driver to the system.  Would you like to proceed?");
+            if (!YesOrNo()) return;
+            Console.WriteLine("Enter the first name:");
+            var name = Console.ReadLine();
+            Console.WriteLine(sb.Append(name));
+            Console.WriteLine("Enter the last name");
+            var lastName = Console.ReadLine();
+            Console.Clear();
+            Console.WriteLine(sb.AppendLine(lastName));
+            Console.WriteLine("\nWhat is the phone number?");
+            var phone = Console.ReadLine();
+            Console.Clear();
+            Console.WriteLine(sb.AppendLine(phone));
+            Console.WriteLine("Enter the email address");
+            var email = Console.ReadLine();
+            Console.Clear();
+            Console.WriteLine(sb.AppendLine(email));
+            Driver newDriver = new Driver()
+                }
         //Edit
         private void EditDriver() {
-
+            
         }
         //Helper Methods
         public int TryParse(string number) {
@@ -83,6 +101,23 @@ namespace Challenge_8_Console {
                 int.TryParse(number, out k);
             }
             return k;
+        }
+        //YesNo
+        private bool YesOrNo() {
+
+            while (true) {
+                string input = Console.ReadLine().ToLower();
+                switch (input) {
+
+                    case "yes":
+                    case "y":
+                        return true;
+                    case "no":
+                    case "n":
+                        return false;
+                }
+                Console.WriteLine("Please enter 'y' or 'n' ");
+            }
         }
 
         //Seed

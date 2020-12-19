@@ -145,54 +145,56 @@ namespace Challenge_5_Console {
             if (custToEdit == null) {
                 return;
             }
-            var replacement = new Customer();
-            Console.WriteLine($"Do you wish to remove {custToEdit.FirstName} {custToEdit.LastName} for database?");
-            if (YesOrNo()) {
-                Console.WriteLine($"Are you sure?  {custToEdit.FirstName} {custToEdit.LastName} will be placed on a (DO NOT CONTACT) list.");
+          
+                var replacement = new Customer();
+                Console.WriteLine($"Do you wish to remove {custToEdit.FirstName} {custToEdit.LastName} for database?");
                 if (YesOrNo()) {
-                    _repo.DeleteCustomer(custToEdit);
-                    return;
+                    Console.WriteLine($"Are you sure?  {custToEdit.FirstName} {custToEdit.LastName} will be placed on a (DO NOT CONTACT) list.");
+                    if (YesOrNo()) {
+                        _repo.DeleteCustomer(custToEdit);
+                        return;
+                    }
+
+                }
+                Console.WriteLine("Do you need to change the first name?");
+                if (YesOrNo()) {// can I write a foreach loop for every prop in object properties to do all these things
+                    Console.WriteLine("Enter the new first name:");
+                    replacement.FirstName = Console.ReadLine();
+                }
+                Console.WriteLine("Do you need to change the last name?");
+                if (YesOrNo()) {
+                    Console.WriteLine("Enter the new last name:");
+                    replacement.LastName = Console.ReadLine();
+                }
+                Console.WriteLine("Do you need to change the email address?");
+                if (YesOrNo()) {
+                    Console.WriteLine("Enter the new email address");
+                    replacement.Email = Console.ReadLine();
+                }
+                Console.WriteLine("Do you need to change the phone number?");
+                if (YesOrNo()) {
+                    Console.WriteLine("Enter the new phone number with no dashes");
+                    replacement.PhoneNumber = Console.ReadLine();
+                }
+                Console.WriteLine("Change or confirm the status:\n" +
+                    "1.  Current Customer\n" +
+                    "2.  Past Customer\n" +
+                    "3.  Prospective Customer");
+                int status = 5;
+                while (status > 3) {
+                    status = TryParse(Console.ReadLine());
+                    if (status < 4) {
+
+                        replacement.StatusOfCustomer = (CustomerStatus)status;
+                    }
+                    else {
+                        Console.WriteLine("Please enter 1, 2, or 3");
+                    }
                 }
 
+                _repo.EditCustomer(custToEdit, replacement);
             }
-            Console.WriteLine("Do you need to change the first name?");
-            if (YesOrNo()) {// can I write a foreach loop for every prop in object properties to do all these things
-                Console.WriteLine("Enter the new first name:");
-                replacement.FirstName = Console.ReadLine();
-            }
-            Console.WriteLine("Do you need to change the last name?");
-            if (YesOrNo()) {
-                Console.WriteLine("Enter the new last name:");
-                replacement.LastName = Console.ReadLine();
-            }
-            Console.WriteLine("Do you need to change the email address?");
-            if (YesOrNo()) {
-                Console.WriteLine("Enter the new email address");
-                replacement.Email = Console.ReadLine();
-            }
-            Console.WriteLine("Do you need to change the phone number?");
-            if (YesOrNo()) {
-                Console.WriteLine("Enter the new phone number with no dashes");
-                replacement.PhoneNumber = Console.ReadLine();
-            }
-            Console.WriteLine("Change or confirm the status:\n" +
-                "1.  Current Customer\n" +
-                "2.  Past Customer\n" +
-                "3.  Prospective Customer");
-            int status = 5;
-            while (status > 3) {
-                status = TryParse(Console.ReadLine());
-                if (status < 4) {
-
-                    replacement.StatusOfCustomer = (CustomerStatus)status;
-                }
-                else {
-                    Console.WriteLine("Please enter 1, 2, or 3");
-                }
-            }
-            _repo.EditCustomer(custToEdit, replacement);
-
-        }
+        
         private void Send() {
             ViewEmails();
             Console.WriteLine("Press 's' to send these emails now.  Any other key to return to previous menu");
