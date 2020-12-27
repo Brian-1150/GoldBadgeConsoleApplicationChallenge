@@ -36,6 +36,8 @@ namespace Challenge_8_Repository {
             }
         } // need to add InitialDateOfService as property and add as default
         public int CustomerID { get; set; }
+        public string PhoneNumber2 { get; set; }
+        public string Email2 { get; set; }
         public Driver() { }
 
         public Driver(Vehicle type, CustomerStatus statusOfCustomer, string firstName, string lastName, string phoneNumber, string email)

@@ -26,7 +26,7 @@ namespace Challenge_8_Console {
                 "1.  View List of Drivers\n" +
                 "2.  Add New Drivers to Database\n" +
                 "3.  Edit Drivers\n" +
-                "4.  \n" +
+                "4.  Update Driving Record\n" +
                 "5.  Exit");
 
             Console.WriteLine("What would you like to do next?  Please choose a number from the menu");
@@ -58,12 +58,25 @@ namespace Challenge_8_Console {
 
         //View
         private void ViewDrivers() {
-           var dictionary = _repo.GetDictionaryOfDrivers();
-            Console.Write("{0,-12} {1,-12} {2, -25} {3, -15} {4, 0}\n\n", "CustomerID", "Last Name", "First Name", "Points", "Monthly Premium");
+            var dictionary = _repo.GetDictionaryOfDrivers();
+            Console.Write("{0,-12} {1,-12} {2, -15} {3, -15} {4, 0}\n\n", "CustomerID", "Last Name", "First Name", "Points", "Monthly Premium");
             foreach (KeyValuePair<int, Driver> driver in dictionary) {
-                Console.WriteLine("{0,-12} {1,-12} {2, -25} {3, -15} {4, 0}", driver.Value.CustomerID, driver.Value.LastName, driver.Value.FirstName, driver.Value.Points.ToString("#,#.##"), driver.Value.Premium.ToString("#,#.##"));
+                Console.WriteLine("{0,-12} {1,-12} {2, -15} {3, -15} {4, 0}", driver.Value.CustomerID, driver.Value.LastName, driver.Value.FirstName, driver.Value.Points.ToString("#,#.##"), driver.Value.Premium.ToString("#,#.##"));
 
             }
+        }
+        private bool ViewDetailsForDriver(int key) {
+            Driver driver = FoundDriver(key);
+            if (driver == null) {
+                Console.WriteLine("Driver could not be found.  Please try again.");
+                return false;
+            }
+            Console.WriteLine($"Customer ID: {driver.CustomerID}\n" +
+                              $"{0,-40}", $"First Name:             {driver.FirstName}", $"Last Name:  {driver.LastName}\n" +
+                              $"{0,-40}", $"Primary Phone Number:   {driver.PhoneNumber}", $"Secondary Phone Number: {driver.PhoneNumber2}\n" +
+                              $"{0,-40}", $"Email:                  {driver.Email}", $"Secondary Email:        {driver.Email2}\n");
+
+            return true;
         }
         //Add
         private void AddDriver() {
@@ -71,8 +84,8 @@ namespace Challenge_8_Console {
             Console.WriteLine("From here you will be able to add a new driver to the system.  Would you like to proceed?");
             if (!YesOrNo()) return;
             Console.WriteLine("Enter the first name:");
-            var name = Console.ReadLine();
-            Console.WriteLine(sb.Append(name));
+            var firstName = Console.ReadLine();
+            Console.WriteLine(sb.Append(firstName));
             Console.WriteLine("Enter the last name");
             var lastName = Console.ReadLine();
             Console.Clear();
@@ -85,11 +98,71 @@ namespace Challenge_8_Console {
             var email = Console.ReadLine();
             Console.Clear();
             Console.WriteLine(sb.AppendLine(email));
-            Driver newDriver = new Driver()
-                }
+            Console.WriteLine("Now let's get the vehicle info");
+            Console.WriteLine("Enter the make and model");
+            string makeModel = Console.ReadLine();
+            Console.WriteLine("Enter the retail cost");
+            double price = TryParseDub(Console.ReadLine());
+            Console.WriteLine("Choose the number of the type from the list\n" +
+                              "1.  Sedan\n" +
+                              "2.  Van\n" +
+                              "3.  Truck\n" +
+                              "4.  Coupe\n" +
+                              "5.  Other");
+            int type = TryParse(Console.ReadLine());
+            Vehicle newVehicle = new Vehicle(makeModel, price, (Vehicle.VehicleType)type);
+
+            Driver newDriver = new Driver(newVehicle, CustomerStatus.Current, firstName, lastName, phone, email);
+            _repo.AddDriver(newDriver);
+        }
+
+
         //Edit
         private void EditDriver() {
-            
+            bool exit = false;
+            ViewDrivers();
+            Console.WriteLine("Enter the number of the driver you wish to update:");
+            int key = TryParse(Console.ReadLine());
+            if (ViewDetailsForDriver(key) == false) return;
+            Console.WriteLine("Do you need to update basic contact info at this time?");
+            if (YesOrNo()) {
+                while (exit == false) {
+                    Console.WriteLine("    Enter the number of the category you wish to edit.");
+                    Console.WriteLine("\n1.  First Name\n" +
+                                      "2.  Last Name\n" +
+                                      "3.  Primary Phone Number\n" +
+                                      "4.  Secondonary Phone Number\n" +
+                                      "5.  Primary Email\n" +
+                                      "6.  Secondary Email\n" +
+                                      "7.  Finished Updating");
+                    string input = Console.ReadLine();
+                    switch (input) {
+                        case "1":
+                            Console.WriteLine("Enter the first name:");
+                            var firstName = Console.ReadLine();
+                            break;
+                        case "2":
+                            Console.WriteLine("Enter the last name:");
+                            var lastName = Console.ReadLine();
+                            break;
+                        case "3":
+                            Console.WriteLine("Enter the new phone number:");
+                            string phone = Console.ReadLine();
+                            break;
+                        case "4": Console.WriteLine("Enter the secondary phone number:");
+                            string phone2 = Console.ReadLine();
+                            break;
+                        case "5": Console.WriteLine("Enter the primary email:");
+                            break;
+                        case "6": Console.WriteLine("Enter the secondary email");
+                            break;
+                        case "7": exit = true;
+                            break;
+                    }
+                } 
+            }
+
+
         }
         //Helper Methods
         public int TryParse(string number) {
@@ -101,6 +174,15 @@ namespace Challenge_8_Console {
                 int.TryParse(number, out k);
             }
             return k;
+        }
+        public double TryParseDub(string dub) {
+            double.TryParse(dub, out double d);
+            while (d <= 0) {
+                Console.WriteLine("Please enter a valid number without $ ex (9.99): ");
+                dub = Console.ReadLine();
+                double.TryParse(dub, out d);
+            }
+            return d;
         }
         //YesNo
         private bool YesOrNo() {
@@ -118,6 +200,12 @@ namespace Challenge_8_Console {
                 }
                 Console.WriteLine("Please enter 'y' or 'n' ");
             }
+        }
+        private Driver FoundDriver(int key) {
+            if (_repo.GetDriver(key) == null) {
+                return null;
+            }
+            else return _repo.GetDriver(key);
         }
 
         //Seed

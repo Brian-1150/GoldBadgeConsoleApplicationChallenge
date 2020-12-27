@@ -35,5 +35,13 @@ namespace Challenge_8_Repository {
         public void DeactiveDriver(Driver deactivatedDriver) {
             _DictionaryOfDrivers.Remove(deactivatedDriver.CustomerID);
         }
+
+        //Helper Methods
+        public Driver GetDriver(int key) {
+            if (_DictionaryOfDrivers.TryGetValue(key, out Driver result)) {
+                return result;
+            }
+            return null;
+        }
     }
 }
