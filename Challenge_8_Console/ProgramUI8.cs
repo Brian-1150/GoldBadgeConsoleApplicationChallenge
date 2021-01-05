@@ -25,7 +25,7 @@ namespace Challenge_8_Console {
             Console.WriteLine(
                 "1.  View List of Drivers\n" +
                 "2.  Add New Drivers to Database\n" +
-                "3.  Edit Drivers\n" +
+                "3.  View/Edit Driver Details\n" +
                 "4.  Update Driving Record\n" +
                 "5.  Exit");
 
@@ -62,24 +62,29 @@ namespace Challenge_8_Console {
             Console.Write("{0,-12} {1,-12} {2, -15} {3, -15} {4, 0}\n\n", "CustomerID", "Last Name", "First Name", "Points", "Monthly Premium");
             foreach (KeyValuePair<int, Driver> driver in dictionary) {
                 Console.WriteLine("{0,-12} {1,-12} {2, -15} {3, -15} {4, 0}", driver.Value.CustomerID, driver.Value.LastName, driver.Value.FirstName, driver.Value.Points.ToString("#,#.##"), driver.Value.Premium.ToString("#,#.##"));
-
+                //when double is 3.9999 it rounds to 4 even though I have format set toString("#,#.##")?????
             }
         }
-        private bool ViewDetailsForDriver(int key) {
+        private void ViewDetailsForDriver(int key) { //consider using overrride ToString in the repo instead of creating this method in the UI
             Driver driver = FoundDriver(key);
             if (driver == null) {
                 Console.WriteLine("Driver could not be found.  Please try again.");
-                return false;
+                return;
             }
-            Console.WriteLine($"Customer ID: {driver.CustomerID}\n" +
-                              $"{0,-40}", $"First Name:             {driver.FirstName}", $"Last Name:  {driver.LastName}\n" +
-                              $"{0,-40}", $"Primary Phone Number:   {driver.PhoneNumber}", $"Secondary Phone Number: {driver.PhoneNumber2}\n" +
-                              $"{0,-40}", $"Email:                  {driver.Email}", $"Secondary Email:        {driver.Email2}\n");
+            Console.WriteLine($"Customer ID:            {driver.CustomerID}\n" +
+                              $"First Name:             {driver.FirstName}\n" +
+                              $"Last Name:              {driver.LastName}\n" +
+                              $"Primary Phone Number:   {driver.PhoneNumber}   Secondary Phone Number: {driver.PhoneNumber2}\n" +
+                              $"Email:                  {driver.Email}   Secondary Email:        {driver.Email2}" +
+                              $"Customer Since:         {driver.InitialDateOfService:d}\n" + //simplified version of short DateTime
+                              $"Vehicle:                {driver.Type.TypeOfVehicle}\n" +
+                              $"Last Infraction:        {driver.DateOfLastInfraction:M/d/yyyy}"); //another way to declare how date should look
+                              
 
-            return true;
         }
         //Add
         private void AddDriver() {
+            
             var sb = new StringBuilder();
             Console.WriteLine("From here you will be able to add a new driver to the system.  Would you like to proceed?");
             if (!YesOrNo()) return;
@@ -116,15 +121,24 @@ namespace Challenge_8_Console {
             _repo.AddDriver(newDriver);
         }
 
-
         //Edit
         private void EditDriver() {
+        Console.Clear();
             bool exit = false;
             ViewDrivers();
-            Console.WriteLine("Enter the number of the driver you wish to update:");
+            Console.WriteLine("Enter the number of the driver to see more details and/or update:");
             int key = TryParse(Console.ReadLine());
-            if (ViewDetailsForDriver(key) == false) return;
-            Console.WriteLine("Do you need to update basic contact info at this time?");
+            Driver driverToEdit = FoundDriver(key);
+            if (driverToEdit == null) { return; }
+            ViewDetailsForDriver(key);
+            Console.WriteLine("Would you like to see a detailed list of infractions?");
+            if (YesOrNo()) {
+                Console.WriteLine("$List of Infractions:");
+                foreach (var infr in driverToEdit.RecentInfractions) {
+                    Console.WriteLine(infr);
+                }
+            }
+            Console.WriteLine("\nDo you need to update basic contact info at this time?");
             if (YesOrNo()) {
                 while (exit == false) {
                     Console.WriteLine("    Enter the number of the category you wish to edit.");
@@ -140,29 +154,41 @@ namespace Challenge_8_Console {
                         case "1":
                             Console.WriteLine("Enter the first name:");
                             var firstName = Console.ReadLine();
+                            driverToEdit.FirstName = firstName;
                             break;
                         case "2":
                             Console.WriteLine("Enter the last name:");
                             var lastName = Console.ReadLine();
+                            driverToEdit.LastName = lastName;
                             break;
                         case "3":
                             Console.WriteLine("Enter the new phone number:");
                             string phone = Console.ReadLine();
+                            driverToEdit.PhoneNumber = phone;
                             break;
-                        case "4": Console.WriteLine("Enter the secondary phone number:");
+                        case "4":
+                            Console.WriteLine("Enter the secondary phone number:");
                             string phone2 = Console.ReadLine();
+                            driverToEdit.PhoneNumber2 = phone2;
                             break;
-                        case "5": Console.WriteLine("Enter the primary email:");
+                        case "5":
+                            Console.WriteLine("Enter the primary email:");
+                            string email = Console.ReadLine();
+                            driverToEdit.Email = email;
                             break;
-                        case "6": Console.WriteLine("Enter the secondary email");
+                        case "6":
+                            Console.WriteLine("Enter the secondary email");
+                            string email2 = Console.ReadLine();
+                            driverToEdit.Email2 = email2;
                             break;
-                        case "7": exit = true;
+                        case "7":
+                            exit = true;
                             break;
                     }
-                } 
+
+                }
+
             }
-
-
         }
         //Helper Methods
         public int TryParse(string number) {
@@ -215,6 +241,12 @@ namespace Challenge_8_Console {
             Vehicle vehicle3 = new Vehicle("Ford Mustang", 32000, Vehicle.VehicleType.Coupe);
             Vehicle vehicle4 = new Vehicle("Chevrolet Silverado", 42000, Vehicle.VehicleType.Truck);
             Driver seed1 = new Driver(vehicle1, CustomerStatus.Current, "Brian", "Campassi", "317-123-4567", "brian@1150.edu");
+            seed1.InitialDateOfService = new DateTime(1980, 10, 08);
+            Infractions infractionSeed1 = new Infractions(InfractionType.LaneViolation, DateTime.Now);
+            Infractions infractionSeed2 = new Infractions(InfractionType.RollingStop, new DateTime(2020, 10, 10)); 
+            //seed1.RecentInfractions.Add(Infractions((InfractionType.LaneViolation, DateTime.Now)); not allowed like this???
+            seed1.RecentInfractions.Add(infractionSeed1);
+            seed1.RecentInfractions.Add(infractionSeed2);
             Driver seed3 = new Driver(vehicle2, (CustomerStatus)1, "Joe", "Johnson", "317-317-3173", "joe@elevenfifty.com");
             Driver seed4 = new Driver(vehicle3, (CustomerStatus)1, "Jack", "Johnson", "377-317-3173", "jj@elevenfifty.com");
             Driver seed5 = new Driver(vehicle4, CustomerStatus.Current, "Elli", "Belly", "123-456-7890", "Ellbell@123.org");

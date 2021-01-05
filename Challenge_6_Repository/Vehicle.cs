@@ -53,5 +53,8 @@ namespace Challenge_6_Repository {
             : base(fuelEconomy, makeModel, retailCost, typeOfVehicle) {
             PowerRating = powerRating;
         }
+        public override string ToString() {
+            return base.ToString();
+        }
     }
 }
