@@ -65,7 +65,7 @@ namespace Challenge_8_Console {
                 //when double is 3.9999 it rounds to 4 even though I have format set toString("#,#.##")?????
             }
         }
-        private void ViewDetailsForDriver(int key) { //consider using overrride ToString in the repo instead of creating this method in the UI
+        private void ViewDetailsForDriver(int key) { //consider using override ToString in the repo instead of creating this method in the UI
             Driver driver = FoundDriver(key);
             if (driver == null) {
                 Console.WriteLine("Driver could not be found.  Please try again.");
@@ -120,6 +120,9 @@ namespace Challenge_8_Console {
             Driver newDriver = new Driver(newVehicle, CustomerStatus.Current, firstName, lastName, phone, email);
             _repo.AddDriver(newDriver);
         }
+        private void AddInfraction() {
+            
+        }
 
         //Edit
         private void EditDriver() {
@@ -133,7 +136,7 @@ namespace Challenge_8_Console {
             ViewDetailsForDriver(key);
             Console.WriteLine("Would you like to see a detailed list of infractions?");
             if (YesOrNo()) {
-                Console.WriteLine("$List of Infractions:");
+                Console.WriteLine($"\nList of Infractions:");
                 foreach (var infr in driverToEdit.RecentInfractions) {
                     Console.WriteLine(infr);
                 }
@@ -189,9 +192,39 @@ namespace Challenge_8_Console {
                 }
 
             }
+
         }
-        //Helper Methods
-        public int TryParse(string number) {
+
+        private void UpdateDrivingRecord() {
+            Console.Clear();
+            bool exit = false;
+            ViewDrivers();
+            Console.WriteLine("Enter the number of the driver who's driving record you wish to update. ");
+            int key = TryParse(Console.ReadLine());
+            Driver driverToEdit = FoundDriver(key);
+            if (driverToEdit == null) { return; }
+            ViewDetailsForDriver(key);
+            Console.WriteLine($"\nList of Infractions:");
+            foreach (var infr in driverToEdit.RecentInfractions) {
+                Console.WriteLine(infr);
+            }
+            while (exit == false) {
+                Console.WriteLine("    The SmartCar technology automatically records infractions and\n" +
+                                  " updates driving records.  Are you sure you want to manually override\n" +
+                                  "the record?");
+                if (YesOrNo()) {
+                    Console.WriteLine("\n1.  Add Infraction\n" +
+                                      "2.  Remove Infraction\n" +
+                                      "3.  Edit Infraction\n");
+                    string input = Console.ReadLine();
+                    switch (input) {
+                        case "1": break;
+                    }
+                }
+            }
+        }
+            //Helper Methods
+            public int TryParse(string number) {
 
             int.TryParse(number, out int k);
             while (k <= 0) {

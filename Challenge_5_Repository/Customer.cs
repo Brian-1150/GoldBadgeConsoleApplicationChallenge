@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Challenge_5_Repository {
 
     abstract public class Person {
-        public string FirstName { get; set; } = ""; //setting these equal to prevent null exception when searching
+        public string FirstName { get; set; }= ""; //setting these equal to prevent null exception when searching
         public string LastName { get; set; } = "";
         public string PhoneNumber { get; set; } = "";
         public string Email { get; set; } = "";

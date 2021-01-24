@@ -4,3 +4,9 @@ C:\Users\bpcam\OneDrive\ElevenFiftyProjects\C#\GoldBadgeConsoleApplicationChalle
 C:\Users\bpcam\OneDrive\ElevenFiftyProjects\C#\GoldBadgeConsoleApplicationChallenge\Challenge_5_Repository\obj\Debug\Challenge_5_Repository.csproj.CoreCompileInputs.cache
 C:\Users\bpcam\OneDrive\ElevenFiftyProjects\C#\GoldBadgeConsoleApplicationChallenge\Challenge_5_Repository\obj\Debug\Challenge_5_Repository.dll
 C:\Users\bpcam\OneDrive\ElevenFiftyProjects\C#\GoldBadgeConsoleApplicationChallenge\Challenge_5_Repository\obj\Debug\Challenge_5_Repository.pdb
+C:\Users\bpcam\OneDrive - Indiana University\ElevenFiftyProjects\C#\GoldBadgeConsoleApplicationChallenge\Challenge_5_Repository\bin\Debug\Challenge_5_Repository.dll
+C:\Users\bpcam\OneDrive - Indiana University\ElevenFiftyProjects\C#\GoldBadgeConsoleApplicationChallenge\Challenge_5_Repository\bin\Debug\Challenge_5_Repository.pdb
+C:\Users\bpcam\OneDrive - Indiana University\ElevenFiftyProjects\C#\GoldBadgeConsoleApplicationChallenge\Challenge_5_Repository\obj\Debug\Challenge_5_Repository.csprojAssemblyReference.cache
+C:\Users\bpcam\OneDrive - Indiana University\ElevenFiftyProjects\C#\GoldBadgeConsoleApplicationChallenge\Challenge_5_Repository\obj\Debug\Challenge_5_Repository.csproj.CoreCompileInputs.cache
+C:\Users\bpcam\OneDrive - Indiana University\ElevenFiftyProjects\C#\GoldBadgeConsoleApplicationChallenge\Challenge_5_Repository\obj\Debug\Challenge_5_Repository.dll
+C:\Users\bpcam\OneDrive - Indiana University\ElevenFiftyProjects\C#\GoldBadgeConsoleApplicationChallenge\Challenge_5_Repository\obj\Debug\Challenge_5_Repository.pdb

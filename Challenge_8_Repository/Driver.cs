@@ -46,7 +46,7 @@ namespace Challenge_8_Repository {
         public Driver(Vehicle type, CustomerStatus statusOfCustomer, string firstName, string lastName, string phoneNumber, string email)
             : base(statusOfCustomer, firstName, lastName, phoneNumber, email) {
             Type = type;
-
+            
         }
     }
 
@@ -64,7 +64,7 @@ namespace Challenge_8_Repository {
             TypeOfInfraction = typeOfInfraction;
             DateOfInfraction = dateOfInfraction;
         }
-        public override string ToString() {
+        public override string ToString() { //To avoid doing foreach statements in UI every time I want to print these details
             string x = "Date:  ";
             x += DateOfInfraction.ToShortDateString();
             x += "\nType:  ";

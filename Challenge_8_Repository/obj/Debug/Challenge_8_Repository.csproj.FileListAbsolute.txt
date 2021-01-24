@@ -9,3 +9,14 @@ C:\Users\bpcam\OneDrive\ElevenFiftyProjects\C#\GoldBadgeConsoleApplicationChalle
 C:\Users\bpcam\OneDrive\ElevenFiftyProjects\C#\GoldBadgeConsoleApplicationChallenge\Challenge_8_Repository\obj\Debug\Challenge_8_Repository.csproj.CopyComplete
 C:\Users\bpcam\OneDrive\ElevenFiftyProjects\C#\GoldBadgeConsoleApplicationChallenge\Challenge_8_Repository\obj\Debug\Challenge_8_Repository.dll
 C:\Users\bpcam\OneDrive\ElevenFiftyProjects\C#\GoldBadgeConsoleApplicationChallenge\Challenge_8_Repository\obj\Debug\Challenge_8_Repository.pdb
+C:\Users\bpcam\OneDrive - Indiana University\ElevenFiftyProjects\C#\GoldBadgeConsoleApplicationChallenge\Challenge_8_Repository\bin\Debug\Challenge_8_Repository.dll
+C:\Users\bpcam\OneDrive - Indiana University\ElevenFiftyProjects\C#\GoldBadgeConsoleApplicationChallenge\Challenge_8_Repository\bin\Debug\Challenge_8_Repository.pdb
+C:\Users\bpcam\OneDrive - Indiana University\ElevenFiftyProjects\C#\GoldBadgeConsoleApplicationChallenge\Challenge_8_Repository\bin\Debug\Challenge_5_Repository.dll
+C:\Users\bpcam\OneDrive - Indiana University\ElevenFiftyProjects\C#\GoldBadgeConsoleApplicationChallenge\Challenge_8_Repository\bin\Debug\Challenge_6_Repository.dll
+C:\Users\bpcam\OneDrive - Indiana University\ElevenFiftyProjects\C#\GoldBadgeConsoleApplicationChallenge\Challenge_8_Repository\bin\Debug\Challenge_5_Repository.pdb
+C:\Users\bpcam\OneDrive - Indiana University\ElevenFiftyProjects\C#\GoldBadgeConsoleApplicationChallenge\Challenge_8_Repository\bin\Debug\Challenge_6_Repository.pdb
+C:\Users\bpcam\OneDrive - Indiana University\ElevenFiftyProjects\C#\GoldBadgeConsoleApplicationChallenge\Challenge_8_Repository\obj\Debug\Challenge_8_Repository.csprojAssemblyReference.cache
+C:\Users\bpcam\OneDrive - Indiana University\ElevenFiftyProjects\C#\GoldBadgeConsoleApplicationChallenge\Challenge_8_Repository\obj\Debug\Challenge_8_Repository.csproj.CoreCompileInputs.cache
+C:\Users\bpcam\OneDrive - Indiana University\ElevenFiftyProjects\C#\GoldBadgeConsoleApplicationChallenge\Challenge_8_Repository\obj\Debug\Challenge_8_Repository.csproj.CopyComplete
+C:\Users\bpcam\OneDrive - Indiana University\ElevenFiftyProjects\C#\GoldBadgeConsoleApplicationChallenge\Challenge_8_Repository\obj\Debug\Challenge_8_Repository.dll
+C:\Users\bpcam\OneDrive - Indiana University\ElevenFiftyProjects\C#\GoldBadgeConsoleApplicationChallenge\Challenge_8_Repository\obj\Debug\Challenge_8_Repository.pdb

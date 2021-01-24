@@ -147,7 +147,7 @@ namespace Challenge_5_Console {
             }
           
                 var replacement = new Customer();
-                Console.WriteLine($"Do you wish to remove {custToEdit.FirstName} {custToEdit.LastName} for database?");
+                Console.WriteLine($"Do you wish to remove {custToEdit.FirstName} {custToEdit.LastName} from database?");
                 if (YesOrNo()) {
                     Console.WriteLine($"Are you sure?  {custToEdit.FirstName} {custToEdit.LastName} will be placed on a (DO NOT CONTACT) list.");
                     if (YesOrNo()) {
